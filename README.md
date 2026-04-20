@@ -96,9 +96,9 @@ Pagiflow is built with a modular class-based approach:
 
 ## 📖 Useful Links
 
-- [**Full Documentation**](https://pagiflow.com/docs.html)
-- [**Live Demos**](https://pagiflow.com/pagiflow-demos.html)
-- [**Comparison: Pagiflow vs Swiper**](https://pagiflow.com/pagiflow-vs-swiper.html)
+- [**Full Documentation**](https://www.pagiflow.com/docs)
+- [**Live Demos**](https://www.pagiflow.com/pagiflow-demos)
+- [**Comparison: Pagiflow vs Swiper**](https://www.pagiflow.com/pagiflow-vs-swiper)
 
 ## 📄 License
 
