@@ -1,0 +1,32 @@
+{
+  "name": "pagiflow",
+  "version": "1.0.0",
+  "description": "A high-performance, lightweight, and extremely versatile vanilla JavaScript slider library with zero dependencies.",
+  "main": "dist/js/pagiflow.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagiflow/pagiflow.git"
+  },
+  "keywords": [
+    "javascript",
+    "slider",
+    "carousel",
+    "vanilla-js",
+    "responsive",
+    "touch-slider",
+    "performance",
+    "lightweight",
+    "swipe",
+    "grid-slider",
+    "fade-slider"
+  ],
+  "author": "Pagiflow Contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pagiflow/pagiflow/issues"
+  },
+  "homepage": "https://www.pagiflow.com"
+}

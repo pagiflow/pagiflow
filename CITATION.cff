@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Pagiflow in your project, please cite it as follows."
+authors:
+  - family-names: Pagiflow
+    given-names: Contributors
+title: "Pagiflow: High-Performance Vanilla JS Slider Library"
+version: 1.0.0
+date-released: 2026-04-21
+url: "https://github.com/pagiflow/pagiflow"
+keywords:
+  - javascript
+  - slider
+  - carousel
+  - performance
+  - vanilla-js
+  - responsive-design
+  - open-source
+abstract: "A high-performance, lightweight, and versatile vanilla JavaScript slider library with zero dependencies."
