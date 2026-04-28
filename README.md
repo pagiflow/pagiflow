@@ -15,6 +15,7 @@ Keywords: vanilla js slider, javascript carousel, lightweight slider library, re
 
 <p align="center">
   <a href="https://github.com/pagiflow/pagiflow/stargazers"><img src="https://img.shields.io/github/stars/pagiflow/pagiflow" alt="GitHub Stars"></a>
+  <a href="https://github.com/pagiflow/pagiflow/releases"><img src="https://img.shields.io/github/downloads/pagiflow/pagiflow/total" alt="Downloads"></a>
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   <img src="https://img.shields.io/badge/Size-40KB%20min-green" alt="Size">
   <img src="https://img.shields.io/badge/Version-1.0.0-orange" alt="Version">
