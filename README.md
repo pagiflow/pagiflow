@@ -63,9 +63,9 @@ Add these directly to your HTML's `<head>` and before `</body>`:
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/pagiflow/pagiflow@main/dist/css/pagiflow.min.css"
+  href="https://cdn.jsdelivr.net/gh/pagiflow/pagiflow@v1.0.0/dist/css/pagiflow.min.css"
 />
-<script src="https://cdn.jsdelivr.net/gh/pagiflow/pagiflow@main/dist/js/pagiflow.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/pagiflow/pagiflow@v1.0.0/dist/js/pagiflow.min.js"></script>
 ```
 
 ### 2. Local Setup
