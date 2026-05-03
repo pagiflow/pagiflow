@@ -1049,6 +1049,7 @@
       if (this.slides.length <= 1) return;
       if (this._swipeInitialized) return;
       this._swipeInitialized = !0;
+      this.slider.addEventListener("dragstart", (e) => e.preventDefault());
       let t = 0,
         i = 0,
         e = 0,
