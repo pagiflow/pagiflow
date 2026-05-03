@@ -3,8 +3,31 @@
   "version": "1.0.0",
   "description": "A high-performance, lightweight, and extremely versatile vanilla JavaScript slider library with zero dependencies.",
   "main": "dist/js/pagiflow.min.js",
+  "types": "src/index.d.ts",
+  "style": "src/pagiflow.css",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/pagiflow.js"
+    },
+    "./css": "./src/pagiflow.css",
+    "./react": {
+      "types": "./src/react/index.d.ts",
+      "default": "./src/react/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:js": "terser src/pagiflow.js -o dist/js/pagiflow.min.js -c -m",
+    "build:css": "cleancss -o dist/css/pagiflow.min.css src/pagiflow.css",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "repository": {
     "type": "git",
@@ -28,5 +51,10 @@
   "bugs": {
     "url": "https://github.com/pagiflow/pagiflow/issues"
   },
-  "homepage": "https://www.pagiflow.com"
+  "homepage": "https://www.pagiflow.com",
+  "type": "commonjs",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.46.2"
+  }
 }
