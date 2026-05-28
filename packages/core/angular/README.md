@@ -1,4 +1,6 @@
-﻿# Pagiflow - High-Performance Slider Library
+# Pagiflow - High-Performance Slider Library
+
+![Pagiflow Preview](/assets/images/og-image.png)
 
 Pagiflow is a modern, lightweight slider and carousel library built for speed, simplicity, and smooth performance across websites.
 
@@ -23,7 +25,7 @@ Pagiflow is a modern, lightweight slider and carousel library built for speed, s
 
 ## Completed Documentation
 
-- Website: [https://www.pagiflow.com](https://www.pagiflow.com)
+- Website: [https://www.pagiflow.com/](https://www.pagiflow.com)
 
 ## Installation
 
@@ -33,20 +35,6 @@ Install the library via your preferred package manager:
 npm install pagiflow
 pnpm add pagiflow
 yarn add pagiflow
-```
-
-## Usage
-
-```javascript
-import Pagiflow from "pagiflow";
-import "pagiflow/css";
-
-const slider = Pagiflow("#my-slider", {
-  itemsPerSlide: 1,
-  loop: true,
-  autoplay: true,
-  nav: true,
-});
 ```
 
 ## License

@@ -1,0 +1,120 @@
+{
+  "name": "pagiflow",
+  "version": "4.0.0",
+  "description": "High-performance vanilla JS slider library with native support for React, Vue, Svelte, Solid, and Angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagiflow/pagiflow.git"
+  },
+  "homepage": "https://pagiflow.com",
+  "bugs": {
+    "url": "https://github.com/pagiflow/pagiflow/issues"
+  },
+  "author": "Pagiflow",
+  "main": "dist/pagiflow.js",
+  "module": "dist/pagiflow.module.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/pagiflow.module.js",
+      "require": "./dist/pagiflow.js",
+      "default": "./dist/pagiflow.js"
+    },
+    "./angular": {
+      "types": "./angular/index.d.ts",
+      "esm2022": "./angular/esm2022/pagiflow-angular.mjs",
+      "esm": "./angular/esm2022/pagiflow-angular.mjs",
+      "default": "./angular/fesm2022/pagiflow-angular.mjs"
+    },
+    "./vue": {
+      "types": "./vue/index.d.ts",
+      "import": "./vue/index.esm.js",
+      "require": "./vue/index.cjs.js"
+    },
+    "./react": {
+      "types": "./react/index.d.ts",
+      "import": "./react/index.esm.js",
+      "require": "./react/index.cjs.js"
+    },
+    "./svelte": {
+      "types": "./svelte/index.d.ts",
+      "svelte": "./svelte/index.esm.js",
+      "import": "./svelte/index.esm.js",
+      "require": "./svelte/index.cjs.js"
+    },
+    "./solid": {
+      "solid": "./solid/source/index.js",
+      "types": "./solid/index.d.ts",
+      "import": "./solid/index.esm.js",
+      "require": "./solid/index.cjs.js"
+    },
+    "./css": {
+      "types": "./css.d.ts",
+      "default": "./dist/pagiflow.css"
+    }
+  },
+  "files": [
+    "dist/",
+    "css.d.ts",
+    "react/",
+    "vue/",
+    "svelte/",
+    "solid/",
+    "angular/",
+    "index.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "minify": "node ../../tooling/minify.js",
+    "build": "pnpm --filter \"pagiflow-react\" --filter \"pagiflow-vue\" --filter \"pagiflow-svelte\" --filter \"pagiflow-solid\" --filter \"pagiflow-angular\" build && node ../../tooling/consolidate.js && pnpm minify"
+  },
+  "keywords": [
+    "pagiflow",
+    "slider",
+    "carousel",
+    "vanilla-js",
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "angular",
+    "performance"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
+    "vue": ">=3.2.0",
+    "svelte": ">=3.0.0",
+    "solid-js": ">=1.0.0",
+    "@angular/core": ">=14.0.0",
+    "@angular/common": ">=14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
+    },
+    "@angular/common": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  }
+}

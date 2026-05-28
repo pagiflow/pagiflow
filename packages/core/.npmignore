@@ -1,0 +1,9 @@
+# Exclude source maps — not needed by package consumers
+dist/*.map
+react/*.map
+vue/*.map
+svelte/*.map
+solid/*.map
+angular/*.map
+angular/esm2022/*.map
+angular/fesm2022/*.map

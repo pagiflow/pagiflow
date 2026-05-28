@@ -1,0 +1,42 @@
+{
+  "name": "pagiflow-angular",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Angular wrapper for Pagiflow slider",
+  "main": "dist/index.js",
+  "module": "fesm2022/pagiflow-angular.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/pagiflow-angular.mjs",
+      "esm": "./esm2022/pagiflow-angular.mjs",
+      "default": "./fesm2022/pagiflow-angular.mjs"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
+  },
+  "files": [
+    "dist",
+    "ng-package.json",
+    "package.json"
+  ],
+  "peerDependencies": {
+    "pagiflow": "workspace:*",
+    "@angular/core": "^17.0.0 || ^18.0.0",
+    "@angular/common": "^17.0.0 || ^18.0.0"
+  },
+  "keywords": [
+    "pagiflow",
+    "slider",
+    "carousel",
+    "angular"
+  ],
+  "license": "MIT",
+  "typings": "index.d.ts",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

@@ -1,60 +1,44 @@
 {
   "name": "pagiflow",
-  "version": "1.0.0",
-  "description": "A high-performance, lightweight, and extremely versatile vanilla JavaScript slider library with zero dependencies.",
-  "main": "dist/js/pagiflow.min.js",
-  "types": "src/index.d.ts",
-  "style": "src/pagiflow.css",
-  "exports": {
-    ".": {
-      "types": "./src/index.d.ts",
-      "default": "./src/pagiflow.js"
-    },
-    "./css": "./src/pagiflow.css",
-    "./react": {
-      "types": "./src/react/index.d.ts",
-      "default": "./src/react/index.js"
-    }
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "private": true,
+  "version": "4.0.0",
+  "description": "Monorepo for Pagiflow slider library and wrappers",
   "scripts": {
-    "build:js": "terser src/pagiflow.js -o dist/js/pagiflow.min.js -c -m",
-    "build:css": "cleancss -o dist/css/pagiflow.min.css src/pagiflow.css",
-    "build": "npm run build:js && npm run build:css"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "bench:browser": "node scripts/browser-benchmark.mjs",
+    "ci:verify": "pnpm test && pnpm typecheck && pnpm build",
+    "clean": "turbo clean",
+    "changeset": "changeset",
+    "release": "changeset publish"
   },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pagiflow/pagiflow.git"
-  },
-  "keywords": [
-    "javascript",
-    "slider",
-    "carousel",
-    "vanilla-js",
-    "responsive",
-    "touch-slider",
-    "performance",
-    "lightweight",
-    "swipe",
-    "grid-slider",
-    "fade-slider"
-  ],
-  "author": "Pagiflow Contributors",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pagiflow/pagiflow/issues"
-  },
-  "homepage": "https://www.pagiflow.com",
-  "type": "commonjs",
   "devDependencies": {
-    "clean-css-cli": "^5.6.3",
-    "terser": "^5.46.2"
-  }
+    "@changesets/cli": "^2.27.1",
+    "@solidjs/testing-library": "^0.8.10",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vue/test-utils": "^2.4.10",
+    "axe-core": "^4.11.4",
+    "esbuild": "^0.28.0",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.59.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "turbo": "^1.13.0",
+    "vitest": "^4.1.5"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "main": "index.js",
+  "dependencies": {
+    "prettier": "^2.8.8"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }

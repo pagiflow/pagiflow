@@ -1,0 +1,22 @@
+import 'pagiflow';
+import { NgModule } from '@angular/core';
+import { PagiflowComponent, PagiflowSlideComponent } from './Pagiflow';
+import * as i0 from "@angular/core";
+// ─── Components ───────────────────────────────────────────────────────────────
+export { PagiflowComponent } from './Pagiflow';
+export { PagiflowSlideComponent } from './Pagiflow';
+export class PagiflowModule {
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.14", ngImport: i0, type: PagiflowModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.14", ngImport: i0, type: PagiflowModule, imports: [PagiflowComponent, PagiflowSlideComponent], exports: [PagiflowComponent, PagiflowSlideComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.14", ngImport: i0, type: PagiflowModule, imports: [PagiflowComponent] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.14", ngImport: i0, type: PagiflowModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [PagiflowComponent, PagiflowSlideComponent],
+                    exports: [PagiflowComponent, PagiflowSlideComponent],
+                }]
+        }] });
+// ─── Composable ────────────────────────────────────────────────────────────────
+export { usePagiflow } from './usePagiflow';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxVQUFVLENBQUM7QUFDbEIsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsc0JBQXNCLEVBQUUsTUFBTSxZQUFZLENBQUM7O0FBRXZFLGlGQUFpRjtBQUNqRixPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxZQUFZLENBQUM7QUFDL0MsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sWUFBWSxDQUFDO0FBT3BELE1BQU0sT0FBTyxjQUFjO3dHQUFkLGNBQWM7eUdBQWQsY0FBYyxZQUhmLGlCQUFpQixFQUFFLHNCQUFzQixhQUN6QyxpQkFBaUIsRUFBRSxzQkFBc0I7eUdBRXhDLGNBQWMsWUFIZixpQkFBaUI7OzRGQUdoQixjQUFjO2tCQUoxQixRQUFRO21CQUFDO29CQUNSLE9BQU8sRUFBRSxDQUFDLGlCQUFpQixFQUFFLHNCQUFzQixDQUFDO29CQUNwRCxPQUFPLEVBQUUsQ0FBQyxpQkFBaUIsRUFBRSxzQkFBc0IsQ0FBQztpQkFDckQ7O0FBR0Qsa0ZBQWtGO0FBQ2xGLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSxlQUFlLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJ3BhZ2lmbG93JztcclxuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcclxuaW1wb3J0IHsgUGFnaWZsb3dDb21wb25lbnQsIFBhZ2lmbG93U2xpZGVDb21wb25lbnQgfSBmcm9tICcuL1BhZ2lmbG93JztcclxuXHJcbi8vIOKUgOKUgOKUgCBDb21wb25lbnRzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxyXG5leHBvcnQgeyBQYWdpZmxvd0NvbXBvbmVudCB9IGZyb20gJy4vUGFnaWZsb3cnO1xyXG5leHBvcnQgeyBQYWdpZmxvd1NsaWRlQ29tcG9uZW50IH0gZnJvbSAnLi9QYWdpZmxvdyc7XHJcblxyXG5cclxuQE5nTW9kdWxlKHtcclxuICBpbXBvcnRzOiBbUGFnaWZsb3dDb21wb25lbnQsIFBhZ2lmbG93U2xpZGVDb21wb25lbnRdLFxyXG4gIGV4cG9ydHM6IFtQYWdpZmxvd0NvbXBvbmVudCwgUGFnaWZsb3dTbGlkZUNvbXBvbmVudF0sXHJcbn0pXHJcbmV4cG9ydCBjbGFzcyBQYWdpZmxvd01vZHVsZSB7fVxyXG5cclxuLy8g4pSA4pSA4pSAIENvbXBvc2FibGUg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXHJcbmV4cG9ydCB7IHVzZVBhZ2lmbG93IH0gZnJvbSAnLi91c2VQYWdpZmxvdyc7XHJcbmV4cG9ydCB0eXBlIHsgVXNlUGFnaWZsb3dSZXR1cm4gfSBmcm9tICcuL3VzZVBhZ2lmbG93JztcclxuXHJcbi8vIOKUgOKUgOKUgCBUeXBlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcclxuZXhwb3J0IHR5cGUge1xyXG4gIFBhZ2lmbG93T3B0aW9ucyxcclxuICBQYWdpZmxvd0luc3RhbmNlLFxyXG4gIFBhZ2lmbG93VGh1bWJuYWlsT3B0aW9ucyxcclxuICBQYWdpZmxvd05hdmlnYXRpb25PcHRpb25zLFxyXG4gIFBhZ2lmbG93RGlyZWN0aW9uLFxyXG4gIFBhZ2lmbG93QXV0b1Njcm9sbERpcmVjdGlvbixcclxuICBQYWdpZmxvd1Jlc3BvbnNpdmVPcHRpb25zLFxyXG59IGZyb20gJy4vdHlwZXMnO1xyXG4iXX0=
