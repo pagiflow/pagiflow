@@ -2,7 +2,7 @@
   "name": "pagiflow",
   "private": true,
   "version": "4.0.0",
-  "description": "Monorepo for Pagiflow slider library and wrappers",
+  "description": "High-performance JS slider library with native support for React, Vue, Svelte, Solid, and Angular",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
