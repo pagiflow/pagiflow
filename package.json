@@ -2,7 +2,7 @@
   "name": "pagiflow",
   "private": true,
   "version": "4.0.0",
-  "description": "High-performance JS slider library with native support for React, Vue, Svelte, Solid, and Angular",
+   "description": "Pagiflow is a high-performance, zero-dependency slider for Vanilla JS, React, Vue, Svelte, Angular, and Solid JS.",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

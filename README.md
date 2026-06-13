@@ -13,13 +13,13 @@ Pagiflow is a modern, lightweight slider and carousel library built for speed, s
 
 ## Supported Frameworks
 
-- JavaScript
 - React
 - Vue
 - Svelte
 - Angular
-- Solid
+- Solid JS
 - Next.js
+- Vanilla JavaScript
 
 ## Completed Documentation
 

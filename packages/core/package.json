@@ -1,12 +1,12 @@
 {
   "name": "pagiflow",
   "version": "4.0.0",
-  "description": "High-performance JS slider library with native support for React, Vue, Svelte, Solid, and Angular",
+  "description": "Pagiflow is a high-performance, zero-dependency slider for Vanilla JS, React, Vue, Svelte, Angular, and Solid JS.",
   "repository": {
     "type": "git",
     "url": "https://github.com/pagiflow/pagiflow"
   },
-  "homepage": "https://pagiflow.com",
+  "homepage": "https://www.pagiflow.com/",
   "bugs": {
     "url": "https://github.com/pagiflow/pagiflow/issues"
   },
@@ -74,11 +74,13 @@
     "slider",
     "carousel",
     "vanilla-js",
+    "pure-js",
     "react",
     "vue",
     "svelte",
-    "solid",
+    "solid-js",
     "angular",
+    "next.js",
     "performance"
   ],
   "license": "MIT",
