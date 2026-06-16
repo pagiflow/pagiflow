@@ -1,1482 +1,771 @@
+/**
+ * Pagiflow 4.0.1
+ * A high-performance, zero-dependency slider for Vanilla JS, React, Vue, Svelte, Angular, and Solid JS.
+ * https://pagiflow.com
+ * https://github.com/pagiflow/pagiflow
+ * Copyright 2026-PRESENT
+ * Released under the MIT License
+ * Released on: June 17, 2026
+ */
+
 const Pagiflow = (() => {
   const t = `data:image/svg+xml;base64,${btoa(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" fill="none"></svg>',
-  )}`,
-    i = {
-      direction: "horizontal",
-      fade: !1,
-      grid: !1,
-      gridColumns: 2,
-      gridFill: !1,
-      animate: !0,
-      itemsPerSlide: 1,
-      slidesToScroll: 1,
-      gap: 8,
-      height: "auto",
-      startIndex: 0,
-      loop: !1,
-      speed: 400,
-      swipeThreshold: 60,
-      nav: !1,
-      navDisabledEnd: !1,
-      navigation: null,
-      prevIcon: "‹",
-      nextIcon: "›",
-      prevPosition: null,
-      nextPosition: null,
-      thumbnails: {
-        enabled: !1,
-        position: "bottom",
-        thumbWidth: 80,
-        gap: 5,
-        sidebarHeight: null,
-      },
-      autoplay: !1,
-      autoplayDelay: 3e3,
-      pauseOnHover: !0,
-      paginate: !1,
-      paginationPosition: null,
-      autoScroll: !1,
-      autoScrollSpeed: 0.5,
-      autoScrollDirection: "left",
-      lazyLoad: !1,
-      keyboard: !1,
-      centerMode: !1,
-      centerPadding: 0,
-      rtl: !1,
-      sync: null,
-      responsive: {},
-    };
-  function e(t = {}, s = i) {
-    const n = { ...s };
-    for (const i in t)
-      null !== t[i] &&
-        void 0 !== t[i] &&
-        ("object" != typeof t[i] ||
-          Array.isArray(t[i]) ||
-          !(i in s) ||
-          "object" != typeof s[i] ||
-          Array.isArray(s[i])
-          ? (n[i] = t[i])
-          : (n[i] = e(t[i], s[i])));
-    return n;
+    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" fill="none"></svg>'
+  )}`, i = {
+    direction: "horizontal",
+    fade: false,
+    grid: false,
+    gridColumns: 2,
+    gridFill: false,
+    animate: true,
+    itemsPerSlide: 1,
+    slidesToScroll: 1,
+    gap: 8,
+    height: "auto",
+    startIndex: 0,
+    loop: false,
+    speed: 400,
+    swipeThreshold: 60,
+    nav: false,
+    navDisabledEnd: false,
+    navigation: null,
+    prevIcon: "\u2039",
+    nextIcon: "\u203A",
+    prevPosition: null,
+    nextPosition: null,
+    thumbnails: {
+      enabled: false,
+      position: "bottom",
+      thumbWidth: 80,
+      gap: 5,
+      sidebarHeight: null
+    },
+    autoplay: false,
+    autoplayDelay: 3e3,
+    pauseOnHover: true,
+    paginate: false,
+    paginationPosition: null,
+    autoScroll: false,
+    autoScrollSpeed: 0.5,
+    autoScrollDirection: "left",
+    lazyLoad: false,
+    keyboard: false,
+    centerMode: false,
+    centerPadding: 0,
+    rtl: false,
+    sync: null,
+    responsive: {}
+  };
+  function e(t2 = {}, s2 = i) {
+    const n2 = { ...s2 };
+    for (const i2 in t2)
+      null !== t2[i2] && void 0 !== t2[i2] && ("object" != typeof t2[i2] || Array.isArray(t2[i2]) || !(i2 in s2) || "object" != typeof s2[i2] || Array.isArray(s2[i2]) ? n2[i2] = t2[i2] : n2[i2] = e(t2[i2], s2[i2]));
+    return n2;
   }
-  function s(t, i) {
-    if (!t || !i) return;
-    if ((t.classList.add("pagiflow-nav-absolute"), "string" == typeof i))
-      return void t.classList.add(`${i}`);
-    const e = ["left", "right", "top", "bottom", "transform"];
-    e.forEach((i) => (t.style[i] = "")),
-      Object.entries(i).forEach(([i, s]) => {
-        e.includes(i) && (t.style[i] = "number" == typeof s ? `${s}px` : s);
-      });
+  function s(t2, i2) {
+    if (!t2 || !i2) return;
+    if (t2.classList.add("pagiflow-nav-absolute"), "string" == typeof i2)
+      return void t2.classList.add(`${i2}`);
+    const e2 = ["left", "right", "top", "bottom", "transform"];
+    e2.forEach((i3) => t2.style[i3] = ""), Object.entries(i2).forEach(([i3, s2]) => {
+      e2.includes(i3) && (t2.style[i3] = "number" == typeof s2 ? `${s2}px` : s2);
+    });
   }
-  function n(t, i) {
-    if (!t || !i) return;
-    if ((t.classList.add("pagiflow-pagination-absolute"), "string" == typeof i))
-      return void t.classList.add(`${i}`);
-    const e = ["left", "right", "top", "bottom", "transform"];
-    e.forEach((i) => (t.style[i] = "")),
-      Object.entries(i).forEach(([i, s]) => {
-        e.includes(i) && (t.style[i] = "number" == typeof s ? `${s}px` : s);
-      });
+  function n(t2, i2) {
+    if (!t2 || !i2) return;
+    if (t2.classList.add("pagiflow-pagination-absolute"), "string" == typeof i2)
+      return void t2.classList.add(`${i2}`);
+    const e2 = ["left", "right", "top", "bottom", "transform"];
+    e2.forEach((i3) => t2.style[i3] = ""), Object.entries(i2).forEach(([i3, s2]) => {
+      e2.includes(i3) && (t2.style[i3] = "number" == typeof s2 ? `${s2}px` : s2);
+    });
   }
   class o {
-    constructor(t, i) {
-      (this.slider = t),
-        (this.wrapper = t.closest(".pagiflow-wrapper") || t.parentElement),
-        (this.prevBtn = null),
-        (this.nextBtn = null),
-        (this.options = i),
-        this.options.navigation?.prev &&
-        this.options.navigation?.next &&
-        ((this.prevBtn = document.querySelector(
-          this.options.navigation.prev,
-        )),
-          (this.nextBtn = document.querySelector(this.options.navigation.next)),
-          (this.prevBtn && this.nextBtn) ||
-          console.warn(
-            "Custom nav buttons not found:",
-            this.options.navigation,
-          )),
-        (this.direction = i.direction),
-        (this.grid = !!i.grid),
-        (this.gridColumns = i.gridColumns),
-        (this.gap = i.gap),
-        (this.height = i.height),
-        (this.speed = this.options.speed),
-        (this.thumbnailsEnabled = i.thumbnails.enabled),
-        (this.thumbnailsPosition = i.thumbnails.position),
-        (this.thumbnailsThumbWidth = i.thumbnails.thumbWidth
-          ? "number" == typeof i.thumbnails.thumbWidth
-            ? `${i.thumbnails.thumbWidth}px`
-            : i.thumbnails.thumbWidth
-          : null),
-        (this.thumbnailsGap = i.thumbnails.gap
-          ? "number" == typeof i.thumbnails.gap
-            ? `${i.thumbnails.gap}px`
-            : i.thumbnails.gap
-          : null),
-        (this.thumbnailsSidebarHeight = i.thumbnails.sidebarHeight || null),
-        (this.index = this.options.startIndex || 0),
-        (this.slides = []),
-        (this._onSlideChange = null),
-        (this._lastEmittedIndex = null),
-        (this.currentPerSlide = this.thumbnailsEnabled ? 1 : i.itemsPerSlide),
-        (this.thumbItems = []),
-        (this.originalItems = Array.from(t.children).map((t) =>
-          t.cloneNode(!0),
-        )),
-        (this.autoScrollRAF = null),
-        (this.autoScrollOffset = 0),
-        (this.autoTimer = null),
-        (this.isPaused = !1),
-        (this.isDragging = !1),
-        (this.isHovering = !1),
-        (this.startX = 0),
-        (this.startY = 0),
-        (this.currentX = 0),
-        (this.currentY = 0),
-        (this.paginationEl = null),
-        (this.dots = []),
-        (this.destroyed = !1),
-        (this._slideClickLocked = !1),
-        (this.isDragLocked = !1),
-        (this.dragTimestamps = []),
-        (this.autoScroll = !!this.options.autoScroll),
-        (this.autoScrollSpeed = this.options.autoScrollSpeed),
-        (this.autoScrollDirection = (
-          this.options.autoScrollDirection || "left"
-        ).trim()),
-        (this.autoplayDelay = this.options.autoplayDelay),
-        (this.navDisabledEnd = this.options.navDisabledEnd ?? !1),
-        (this.loop = !!this.options.loop),
-        (this.isLoopJumping = !1),
-        (this.isAnimating = !1),
-        (this.lazyObserver = null),
-        (this.slidesToScroll = i.slidesToScroll || 1),
-        (this.centerMode = i.centerMode),
-        (this.centerPadding = void 0 !== i.centerPadding ? i.centerPadding : 0),
-        (this.rtl = !!this.options.rtl),
-        (this.fade = !!i.fade),
-        (this.gridFill = !!i.gridFill),
-        (this.animate = !!i.animate),
-        (this.syncTarget = null),
-        (this._syncing = !1),
-        this.init(),
-        this._bindLoopFix();
+    constructor(t2, i2) {
+      this.slider = t2, this.wrapper = t2.closest(".pagiflow-wrapper") || t2.parentElement, this.prevBtn = null, this.nextBtn = null, this.options = i2, this.options.navigation?.prev && this.options.navigation?.next && (this.prevBtn = document.querySelector(
+        this.options.navigation.prev
+      ), this.nextBtn = document.querySelector(this.options.navigation.next), this.prevBtn && this.nextBtn || console.warn(
+        "Custom nav buttons not found:",
+        this.options.navigation
+      )), this.direction = i2.direction, this.grid = !!i2.grid, this.gridColumns = i2.gridColumns, this.gap = i2.gap, this.height = i2.height, this.speed = this.options.speed, this.thumbnailsEnabled = i2.thumbnails.enabled, this.thumbnailsPosition = i2.thumbnails.position, this.thumbnailsThumbWidth = i2.thumbnails.thumbWidth ? "number" == typeof i2.thumbnails.thumbWidth ? `${i2.thumbnails.thumbWidth}px` : i2.thumbnails.thumbWidth : null, this.thumbnailsGap = i2.thumbnails.gap ? "number" == typeof i2.thumbnails.gap ? `${i2.thumbnails.gap}px` : i2.thumbnails.gap : null, this.thumbnailsSidebarHeight = i2.thumbnails.sidebarHeight || null, this.index = this.options.startIndex || 0, this.slides = [], this._onSlideChange = null, this._lastEmittedIndex = null, this.currentPerSlide = this.thumbnailsEnabled ? 1 : i2.itemsPerSlide, this.thumbItems = [], this.originalItems = Array.from(t2.children).map(
+        (t3) => t3.cloneNode(true)
+      ), this.autoScrollRAF = null, this.autoScrollOffset = 0, this.autoTimer = null, this.isPaused = false, this.isDragging = false, this.isHovering = false, this.startX = 0, this.startY = 0, this.currentX = 0, this.currentY = 0, this.paginationEl = null, this.dots = [], this.destroyed = false, this._slideClickLocked = false, this.isDragLocked = false, this.dragTimestamps = [], this.autoScroll = !!this.options.autoScroll, this.autoScrollSpeed = this.options.autoScrollSpeed, this.autoScrollDirection = (this.options.autoScrollDirection || "left").trim(), this.autoplayDelay = this.options.autoplayDelay, this.navDisabledEnd = this.options.navDisabledEnd ?? false, this.loop = !!this.options.loop, this.isLoopJumping = false, this.isAnimating = false, this.lazyObserver = null, this.slidesToScroll = i2.slidesToScroll || 1, this.centerMode = i2.centerMode, this.centerPadding = void 0 !== i2.centerPadding ? i2.centerPadding : 0, this.rtl = !!this.options.rtl, this.fade = !!i2.fade, this.gridFill = !!i2.gridFill, this.animate = !!i2.animate, this.syncTarget = null, this._syncing = false, this.init(), this._bindLoopFix();
     }
     init() {
-      this.rebuild(!0),
-        this._initSync(),
-        this.bindEvents(),
-        this.bindSlideClick(),
-        this.isDragging || this.autoScroll || this.autoplay
-          ? (this.slider.style.willChange = "transform")
-          : (this.slider.style.willChange = "auto"),
-        this.wrapper.addEventListener("mousedown", () => {
-          this.wrapper.focus();
-        }),
-        this.wrapper.addEventListener("focusin", (t) => {
-          t.target !== this.wrapper && this.wrapper.focus();
-        }),
-        this._setupKeyboard(),
-        this.options.autoScroll || this.bindSwipe(),
-        this._bindNamedEvents(),
-        this.options.autoScroll || this.startAutoplay(),
-        this._bindResize();
+      this.rebuild(true), this._initSync(), this.bindEvents(), this.bindSlideClick(), this.isDragging || this.autoScroll || this.autoplay ? this.slider.style.willChange = "transform" : this.slider.style.willChange = "auto", this.wrapper.addEventListener("mousedown", () => {
+        this.wrapper.focus();
+      }), this.wrapper.addEventListener("focusin", (t2) => {
+        t2.target !== this.wrapper && this.wrapper.focus();
+      }), this._setupKeyboard(), this.options.autoScroll || this.bindSwipe(), this._bindNamedEvents(), this.options.autoScroll || this.startAutoplay(), this._bindResize();
     }
-    bindHoverPause() { }
-    createOrUpdateNav(t) {
-      const i = this.options.navigation?.prev && this.options.navigation?.next;
-      if (i)
+    bindHoverPause() {
+    }
+    createOrUpdateNav(t2) {
+      const i2 = this.options.navigation?.prev && this.options.navigation?.next;
+      if (i2)
         return void (this.prevBtn && this.nextBtn && this.updateNavState());
-      let e = this.wrapper.querySelector(".pagiflow-nav");
-      if ((!1 === t.nav && !i) || this.autoScroll)
-        return e && e.remove(), void (this.prevBtn = this.nextBtn = null);
-      e ||
-        ((e = document.createElement("div")),
-          (e.className = "pagiflow-nav"),
-          (e.innerHTML = `\n        <button class="pagiflow-prev">${t.prevIcon || "‹"
-            }</button>\n        <button class="pagiflow-next">${t.nextIcon || "›"
-            }</button>\n      `),
-          this.wrapper.appendChild(e));
-      const n = e.querySelector(".pagiflow-prev"),
-        o = e.querySelector(".pagiflow-next");
-      n.setAttribute("aria-label", "Previous slide"),
-        o.setAttribute("aria-label", "Next slide"),
-        n.setAttribute("title", "Previous slide"),
-        o.setAttribute("title", "Next slide"),
-        t.prevIcon && (n.innerHTML = t.prevIcon),
-        t.nextIcon && (o.innerHTML = t.nextIcon),
-        s(n, t.prevPosition),
-        s(o, t.nextPosition),
-        (this.prevBtn = n),
-        (this.nextBtn = o),
-        this.updateNavState();
+      let e2 = this.wrapper.querySelector(".pagiflow-nav");
+      if (false === t2.nav && !i2 || this.autoScroll)
+        return e2 && e2.remove(), void (this.prevBtn = this.nextBtn = null);
+      e2 || (e2 = document.createElement("div"), e2.className = "pagiflow-nav", e2.innerHTML = `
+        <button class="pagiflow-prev">${t2.prevIcon || "\u2039"}</button>
+        <button class="pagiflow-next">${t2.nextIcon || "\u203A"}</button>
+      `, this.wrapper.appendChild(e2));
+      const n2 = e2.querySelector(".pagiflow-prev"), o2 = e2.querySelector(".pagiflow-next");
+      n2.setAttribute("aria-label", "Previous slide"), o2.setAttribute("aria-label", "Next slide"), n2.setAttribute("title", "Previous slide"), o2.setAttribute("title", "Next slide"), t2.prevIcon && (n2.innerHTML = t2.prevIcon), t2.nextIcon && (o2.innerHTML = t2.nextIcon), s(n2, t2.prevPosition), s(o2, t2.nextPosition), this.prevBtn = n2, this.nextBtn = o2, this.updateNavState();
     }
     updateNavState() {
       if (!this.prevBtn || !this.nextBtn || this.autoScroll) return;
-      const t = this.options.navigation?.prev && this.options.navigation?.next,
-        i = this.prevBtn.closest(".pagiflow-nav");
-      if (
-        (t ||
-          i.classList.toggle(
-            "pagiflow-nav-hidden",
-            this.slides.length <= (this.grid ? 1 : this.currentPerSlide),
-          ),
-          this.loop)
-      )
-        return (
-          (this.prevBtn.disabled = !1),
-          (this.nextBtn.disabled = !1),
-          this.prevBtn.classList.remove("disabled"),
-          void this.nextBtn.classList.remove("disabled")
-        );
-      const e = this.slides.length - (this.grid ? 1 : this.currentPerSlide),
-        s = this.index <= 0,
-        n = this.index >= e;
-      (this.prevBtn.disabled = this.navDisabledEnd && s),
-        (this.nextBtn.disabled = this.navDisabledEnd && n),
-        this.prevBtn.classList.toggle("disabled", this.navDisabledEnd && s),
-        this.nextBtn.classList.toggle("disabled", this.navDisabledEnd && n);
+      const t2 = this.options.navigation?.prev && this.options.navigation?.next, i2 = this.prevBtn.closest(".pagiflow-nav");
+      if (t2 || i2.classList.toggle(
+        "pagiflow-nav-hidden",
+        this.slides.length <= (this.grid ? 1 : this.currentPerSlide)
+      ), this.loop)
+        return this.prevBtn.disabled = false, this.nextBtn.disabled = false, this.prevBtn.classList.remove("disabled"), void this.nextBtn.classList.remove("disabled");
+      const e2 = this.slides.length - (this.grid ? 1 : this.currentPerSlide), s2 = this.index <= 0, n2 = this.index >= e2;
+      this.prevBtn.disabled = this.navDisabledEnd && s2, this.nextBtn.disabled = this.navDisabledEnd && n2, this.prevBtn.classList.toggle("disabled", this.navDisabledEnd && s2), this.nextBtn.classList.toggle("disabled", this.navDisabledEnd && n2);
     }
-    rebuild(t = !1) {
-      const i = this.getResponsiveSettings();
-      (this.direction = i.direction ?? this.direction),
-        (this.loop = !!i.loop),
-        (this.slidesToScroll = i.slidesToScroll ?? this.slidesToScroll ?? 1),
-        (this.autoScroll = !!i.autoScroll),
-        (this.autoScrollSpeed = i.autoScrollSpeed ?? this.autoScrollSpeed),
-        (this.autoScrollDirection = (
-          (i.autoScrollDirection ?? this.autoScrollDirection) ||
-          "left"
-        ).trim()),
-        (this.centerMode = i.centerMode ?? this.centerMode),
-        (this.centerPadding = void 0 !== i.centerPadding ? i.centerPadding : 0),
-        (this.rtl = i.rtl ?? this.rtl),
-        (this.fade = i.fade ?? this.fade),
-        (this.gridFill = i.gridFill ?? this.gridFill),
-        (this.animate = i.animate ?? this.animate),
-        (this.thumbnailsPosition =
-          i.thumbnails.position ?? this.thumbnailsPosition),
-        (this.thumbnailsThumbWidth = i.thumbnails.thumbWidth
-          ? "number" == typeof i.thumbnails.thumbWidth
-            ? `${i.thumbnails.thumbWidth}px`
-            : i.thumbnails.thumbWidth
-          : null),
-        (this.thumbnailsGap = i.thumbnails.gap
-          ? "number" == typeof i.thumbnails.gap
-            ? `${i.thumbnails.gap}px`
-            : i.thumbnails.gap
-          : null),
-        (this.thumbnailsSidebarHeight = i.thumbnails.sidebarHeight),
-        this.createOrUpdateNav(i),
-        this._navBound || (this.bindEvents(), (this._navBound = !0));
-      const e = i.thumbnails?.enabled ?? !1;
-      let s = !1;
-      e || (s = i.itemsPerSlide === this.currentPerSlide),
-        (this.thumbnailsEnabled = e),
-        this.stopAutoplay(),
-        this.autoScrollRAF &&
-        (cancelAnimationFrame(this.autoScrollRAF),
-          (this.autoScrollRAF = null));
-      const o = this.wrapper.querySelector(".pagiflow-viewport"),
-        l = this.wrapper.querySelector(".pagiflow-thumbnails-wrapper"),
-        r = this.wrapper.querySelector(".pagiflow-viewport");
-      if (o) {
-        let t = this.height;
-        "number" == typeof t && (t += "px"),
-          "vertical" === this.direction
-            ? o.style.setProperty("--pagiflow-height", t)
-            : this.thumbnailsEnabled &&
-            r.style.setProperty("--pagiflow-height", t);
+    rebuild(t2 = false) {
+      const i2 = this.getResponsiveSettings();
+      this.direction = i2.direction ?? this.direction, this.loop = !!i2.loop, this.slidesToScroll = i2.slidesToScroll ?? this.slidesToScroll ?? 1, this.autoScroll = !!i2.autoScroll, this.autoScrollSpeed = i2.autoScrollSpeed ?? this.autoScrollSpeed, this.autoScrollDirection = ((i2.autoScrollDirection ?? this.autoScrollDirection) || "left").trim(), this.centerMode = i2.centerMode ?? this.centerMode, this.centerPadding = void 0 !== i2.centerPadding ? i2.centerPadding : 0, this.rtl = i2.rtl ?? this.rtl, this.fade = i2.fade ?? this.fade, this.gridFill = i2.gridFill ?? this.gridFill, this.animate = i2.animate ?? this.animate, this.thumbnailsPosition = i2.thumbnails.position ?? this.thumbnailsPosition, this.thumbnailsThumbWidth = i2.thumbnails.thumbWidth ? "number" == typeof i2.thumbnails.thumbWidth ? `${i2.thumbnails.thumbWidth}px` : i2.thumbnails.thumbWidth : null, this.thumbnailsGap = i2.thumbnails.gap ? "number" == typeof i2.thumbnails.gap ? `${i2.thumbnails.gap}px` : i2.thumbnails.gap : null, this.thumbnailsSidebarHeight = i2.thumbnails.sidebarHeight, this.createOrUpdateNav(i2), this._navBound || (this.bindEvents(), this._navBound = true);
+      const e2 = i2.thumbnails?.enabled ?? false;
+      let s2 = false;
+      e2 || (s2 = i2.itemsPerSlide === this.currentPerSlide), this.thumbnailsEnabled = e2, this.stopAutoplay(), this.autoScrollRAF && (cancelAnimationFrame(this.autoScrollRAF), this.autoScrollRAF = null);
+      const o2 = this.wrapper.querySelector(".pagiflow-viewport"), l = this.wrapper.querySelector(".pagiflow-thumbnails-wrapper"), r = this.wrapper.querySelector(".pagiflow-viewport");
+      if (o2) {
+        let t3 = this.height;
+        "number" == typeof t3 && (t3 += "px"), "vertical" === this.direction ? o2.style.setProperty("--pagiflow-height", t3) : this.thumbnailsEnabled && r.style.setProperty("--pagiflow-height", t3);
       }
-      if (
-        (this.wrapper.classList.remove(
-          "pagiflow-direction-horizontal",
-          "pagiflow-direction-vertical",
-        ),
-          this.wrapper.classList.add(
-            "vertical" === this.direction
-              ? "pagiflow-direction-vertical"
-              : "pagiflow-direction-horizontal",
-          ),
-          (this.autoScrollOffset = 0),
-          (this.currentPerSlide = this.thumbnailsEnabled
-            ? 1
-            : i.itemsPerSlide ?? this.currentPerSlide),
-          (this.layout = i.layout ?? this.layout),
-          (this.grid = i.grid ?? this.grid),
-          (this.gridColumns = i.gridColumns ?? this.gridColumns),
-          (this.gap = i.gap ?? this.gap),
-          (this.autoplay = !!i.autoplay),
-          (this.lazyLoadEnabled = !!i.lazyLoad),
-          (this.paginate = !!i.paginate),
-          (this.index = 0),
-          this.buildSlides(this.currentPerSlide),
-          this.autoScroll ||
-          (this.buildPagination(),
-            this.paginationEl && n(this.paginationEl, i.paginationPosition)),
-          !this.thumbnailsEnabled ||
-          this.autoScroll ||
-          this.grid ||
-          this.buildThumbnails(),
-          l &&
-          l.classList.remove(
-            "pagiflow-has-thumbnails",
-            "pagiflow-thumbnails-top",
-            "pagiflow-thumbnails-bottom",
-            "pagiflow-thumbnails-left",
-            "pagiflow-thumbnails-right",
-          ),
-          this.thumbnailsEnabled && !this.autoScroll && !this.grid)
-      ) {
-        if (
-          (l.classList.add("pagiflow-has-thumbnails"),
-            l.classList.add(`pagiflow-thumbnails-${this.thumbnailsPosition}`),
-            "left" === this.thumbnailsPosition ||
-            "right" === this.thumbnailsPosition)
-        ) {
-          let t = this.getResponsiveThumbsHeight();
-          if (!t) {
-            const i = this.wrapper.querySelector(".pagiflow-viewport");
-            i && (t = i.getBoundingClientRect().height + "px");
+      if (this.wrapper.classList.remove(
+        "pagiflow-direction-horizontal",
+        "pagiflow-direction-vertical"
+      ), this.wrapper.classList.add(
+        "vertical" === this.direction ? "pagiflow-direction-vertical" : "pagiflow-direction-horizontal"
+      ), this.autoScrollOffset = 0, this.currentPerSlide = this.thumbnailsEnabled ? 1 : i2.itemsPerSlide ?? this.currentPerSlide, this.layout = i2.layout ?? this.layout, this.grid = i2.grid ?? this.grid, this.gridColumns = i2.gridColumns ?? this.gridColumns, this.gap = i2.gap ?? this.gap, this.autoplay = !!i2.autoplay, this.lazyLoadEnabled = !!i2.lazyLoad, this.paginate = !!i2.paginate, this.index = 0, this.buildSlides(this.currentPerSlide), this.autoScroll || (this.buildPagination(), this.paginationEl && n(this.paginationEl, i2.paginationPosition)), !this.thumbnailsEnabled || this.autoScroll || this.grid || this.buildThumbnails(), l && l.classList.remove(
+        "pagiflow-has-thumbnails",
+        "pagiflow-thumbnails-top",
+        "pagiflow-thumbnails-bottom",
+        "pagiflow-thumbnails-left",
+        "pagiflow-thumbnails-right"
+      ), this.thumbnailsEnabled && !this.autoScroll && !this.grid) {
+        if (l.classList.add("pagiflow-has-thumbnails"), l.classList.add(`pagiflow-thumbnails-${this.thumbnailsPosition}`), "left" === this.thumbnailsPosition || "right" === this.thumbnailsPosition) {
+          let t3 = this.getResponsiveThumbsHeight();
+          if (!t3) {
+            const i3 = this.wrapper.querySelector(".pagiflow-viewport");
+            i3 && (t3 = i3.getBoundingClientRect().height + "px");
           }
-          t &&
-            this.thumbnailsEl.style.setProperty(
-              "--pagiflow-thumbnail-height",
-              t,
-            );
-        }
-        this.thumbnailsGap &&
-          this.thumbnailsEl.style.setProperty(
-            "--pagiflow-thumbnail-gap",
-            this.thumbnailsGap,
+          t3 && this.thumbnailsEl.style.setProperty(
+            "--pagiflow-thumbnail-height",
+            t3
           );
+        }
+        this.thumbnailsGap && this.thumbnailsEl.style.setProperty(
+          "--pagiflow-thumbnail-gap",
+          this.thumbnailsGap
+        );
       }
-      this.wrapper.classList.toggle("pagiflow-rtl", this.rtl),
-        !this.autoScroll || this.thumbnailsEnabled || this.grid
-          ? this.startAutoplay()
-          : this.startAutoScroll(),
-        this.initLazyLoad(),
-        this.applyLayout(),
-        this.update(this),
-        this._initSync(),
-        (this._slideClickLocked = !1),
-        this.bindSlideClick();
+      this.wrapper.classList.toggle("pagiflow-rtl", this.rtl), !this.autoScroll || this.thumbnailsEnabled || this.grid ? this.startAutoplay() : this.startAutoScroll(), this.initLazyLoad(), this.applyLayout(), this.update(this), this._initSync(), this._slideClickLocked = false, this.bindSlideClick();
     }
     getResponsiveSettings() {
-      let t = e({}, this.options);
-      Object.keys(this.options.responsive || {})
-        .map(Number)
-        .sort((t, i) => t - i)
-        .forEach((i) => {
-          window.innerWidth >= i && (t = e(this.options.responsive[i], t));
-        }),
-        t.itemsPerSlide || (t.itemsPerSlide = 1),
-        void 0 === t.height && (t.height = "58vh");
-      const i = t.thumbnails?.enabled ? 1 : t.itemsPerSlide;
-      return (
-        t.sync && i !== this.originalItems.length && (t.loop = !0),
-        (this.height = t.height),
-        t
-      );
+      let t2 = e({}, this.options);
+      Object.keys(this.options.responsive || {}).map(Number).sort((t3, i3) => t3 - i3).forEach((i3) => {
+        window.innerWidth >= i3 && (t2 = e(this.options.responsive[i3], t2));
+      }), t2.itemsPerSlide || (t2.itemsPerSlide = 1), void 0 === t2.height && (t2.height = "58vh");
+      const i2 = t2.thumbnails?.enabled ? 1 : t2.itemsPerSlide;
+      return t2.sync && i2 !== this.originalItems.length && (t2.loop = true), this.height = t2.height, t2;
     }
     getResponsiveThumbsHeight() {
-      return this.thumbnailsSidebarHeight
-        ? "number" == typeof this.thumbnailsSidebarHeight
-          ? `${this.thumbnailsSidebarHeight}px`
-          : this.thumbnailsSidebarHeight
-        : null;
+      return this.thumbnailsSidebarHeight ? "number" == typeof this.thumbnailsSidebarHeight ? `${this.thumbnailsSidebarHeight}px` : this.thumbnailsSidebarHeight : null;
     }
-    _disableFocusable(t) {
-      t.querySelectorAll(
-        "a, button, input, textarea, select, [tabindex]",
-      ).forEach((t) => {
-        t.setAttribute("tabindex", "-1"), t.setAttribute("aria-hidden", "true");
+    _disableFocusable(t2) {
+      t2.querySelectorAll(
+        "a, button, input, textarea, select, [tabindex]"
+      ).forEach((t3) => {
+        t3.setAttribute("tabindex", "-1"), t3.setAttribute("aria-hidden", "true");
       });
     }
-    buildSlides(i = 1) {
-      let e = this.originalItems.map((t) => t.cloneNode(!0));
-      if (
-        ((this.slider.innerHTML = ""),
-          (this.slides = []),
-          !this.autoScroll ||
-          this.thumbnailsEnabled ||
-          this.grid ||
-          (e = [...e, ...this.originalItems.map((t) => t.cloneNode(!0))]),
-          this.lazyLoadEnabled &&
-          e.forEach((i) => {
-            i.querySelectorAll("img").forEach((i) => {
-              i.dataset.src ||
-                i.classList.contains("pagiflow-lazy") ||
-                (i.src &&
-                  ((i.dataset.src = i.src),
-                    (i.src = t),
-                    i.classList.add("pagiflow-lazy")));
-            });
-          }),
-          !this.grid || this.autoScroll || this.thumbnailsEnabled)
-      )
-        e.forEach((t, i) => {
-          const e = document.createElement("div");
-          e.classList.add("pagiflow-slide"),
-            e.setAttribute("role", "group"),
-            e.setAttribute("aria-roledescription", "slide"),
-            e.setAttribute(
-              "aria-label",
-              `${i + 1} of ${this.originalItems.length}`,
-            ),
-            e.setAttribute("tabindex", "-1"),
-            e.setAttribute("data-index", i),
-            t.classList.add("pagiflow-item"),
-            e.appendChild(t),
-            this.slider.appendChild(e),
-            this.slides.push(e);
+    buildSlides(i2 = 1) {
+      let e2 = this.originalItems.map((t2) => t2.cloneNode(true));
+      if (this.slider.innerHTML = "", this.slides = [], !this.autoScroll || this.thumbnailsEnabled || this.grid || (e2 = [...e2, ...this.originalItems.map((t2) => t2.cloneNode(true))]), this.lazyLoadEnabled && e2.forEach((i3) => {
+        i3.querySelectorAll("img").forEach((i4) => {
+          i4.dataset.src || i4.classList.contains("pagiflow-lazy") || i4.src && (i4.dataset.src = i4.src, i4.src = t, i4.classList.add("pagiflow-lazy"));
+        });
+      }), !this.grid || this.autoScroll || this.thumbnailsEnabled)
+        e2.forEach((t2, i3) => {
+          const e3 = document.createElement("div");
+          e3.classList.add("pagiflow-slide"), e3.setAttribute("role", "group"), e3.setAttribute("aria-roledescription", "slide"), e3.setAttribute(
+            "aria-label",
+            `${i3 + 1} of ${this.originalItems.length}`
+          ), e3.setAttribute("tabindex", "-1"), e3.setAttribute("data-index", i3), t2.classList.add("pagiflow-item"), e3.appendChild(t2), this.slider.appendChild(e3), this.slides.push(e3);
         });
       else {
-        const t = this.currentPerSlide,
-          i = (this.gap, Math.ceil(e.length / t));
-        for (let s = 0; s < e.length; s += t) {
-          const n = document.createElement("div");
-          n.classList.add("pagiflow-slide"),
-            n.setAttribute("role", "group"),
-            n.setAttribute("aria-roledescription", "slide"),
-            n.setAttribute("aria-label", `${s / t + 1} of ${i}`),
-            n.setAttribute("data-index", s),
-            e.slice(s, s + t).forEach((t) => {
-              t.classList.add("pagiflow-item"),
-                t.classList.add("pagiflow-item-w-full"),
-                n.appendChild(t);
-            }),
-            this.slider.appendChild(n),
-            this.slides.push(n);
+        const t2 = this.currentPerSlide, i3 = (this.gap, Math.ceil(e2.length / t2));
+        for (let s2 = 0; s2 < e2.length; s2 += t2) {
+          const n2 = document.createElement("div");
+          n2.classList.add("pagiflow-slide"), n2.setAttribute("role", "group"), n2.setAttribute("aria-roledescription", "slide"), n2.setAttribute("aria-label", `${s2 / t2 + 1} of ${i3}`), n2.setAttribute("data-index", s2), e2.slice(s2, s2 + t2).forEach((t3) => {
+            t3.classList.add("pagiflow-item"), t3.classList.add("pagiflow-item-w-full"), n2.appendChild(t3);
+          }), this.slider.appendChild(n2), this.slides.push(n2);
         }
       }
       if ((this.loop || this.centerMode) && !this.autoScroll && this.slides.length > 1) {
-        const t = this.slides.length,
-          i = Math.min(this.options.startIndex || 0, t - 1);
-        (this.cloneCount = Math.max(2 * this.currentPerSlide, 3)),
-          (this.cloneCount = Math.min(this.cloneCount, t));
-        for (let i = 0; i < this.cloneCount; i++) {
-          const e = this.slides[t - 1 - i].cloneNode(!0);
-          e.classList.add("pagiflow-cloned"),
-            e.setAttribute("aria-hidden", "true"),
-            e.setAttribute("inert", ""),
-            e.setAttribute("tabindex", "-1"),
-            this._disableFocusable(e),
-            this.slider.prepend(e);
+        const t2 = this.slides.length, i3 = Math.min(this.options.startIndex || 0, t2 - 1);
+        this.cloneCount = Math.max(2 * this.currentPerSlide, 3), this.cloneCount = Math.min(this.cloneCount, t2);
+        for (let i4 = 0; i4 < this.cloneCount; i4++) {
+          const e3 = this.slides[t2 - 1 - i4].cloneNode(true);
+          e3.classList.add("pagiflow-cloned"), e3.setAttribute("aria-hidden", "true"), e3.setAttribute("inert", ""), e3.setAttribute("tabindex", "-1"), this._disableFocusable(e3), this.slider.prepend(e3);
         }
-        for (let t = 0; t < this.cloneCount; t++) {
-          const i = this.slides[t].cloneNode(!0);
-          i.classList.add("pagiflow-cloned"),
-            i.setAttribute("aria-hidden", "true"),
-            i.setAttribute("inert", ""),
-            i.setAttribute("tabindex", "-1"),
-            this._disableFocusable(i),
-            this.slider.appendChild(i);
+        for (let t3 = 0; t3 < this.cloneCount; t3++) {
+          const i4 = this.slides[t3].cloneNode(true);
+          i4.classList.add("pagiflow-cloned"), i4.setAttribute("aria-hidden", "true"), i4.setAttribute("inert", ""), i4.setAttribute("tabindex", "-1"), this._disableFocusable(i4), this.slider.appendChild(i4);
         }
-        (this.slides = Array.from(this.slider.children)),
-          (this.index = this.cloneCount + i);
+        this.slides = Array.from(this.slider.children), this.index = this.cloneCount + i3;
       } else
-        (this.cloneCount = 0),
-          (this.index = Math.min(
-            this.options.startIndex || 0,
-            this.slides.length - 1,
-          ));
+        this.cloneCount = 0, this.index = Math.min(
+          this.options.startIndex || 0,
+          this.slides.length - 1
+        );
     }
-    _getItemHeight(t = 1) {
+    _getItemHeight(t2 = 1) {
       if (!this.height) return null;
-      const i = this.height;
-      return "number" == typeof i
-        ? i / t + "px"
-        : "string" == typeof i
-          ? i.includes("px")
-            ? parseFloat(i) / t + "px"
-            : i.includes("vh")
-              ? parseFloat(i) / t + "vh"
-              : i
-          : null;
+      const i2 = this.height;
+      return "number" == typeof i2 ? i2 / t2 + "px" : "string" == typeof i2 ? i2.includes("px") ? parseFloat(i2) / t2 + "px" : i2.includes("vh") ? parseFloat(i2) / t2 + "vh" : i2 : null;
     }
     _getHeight() {
       if (!this.height) return null;
-      const t = this.height;
-      return "number" == typeof t
-        ? t + "px"
-        : "string" == typeof t
-          ? (t.includes("px") || t.includes("vh"), t)
-          : null;
+      const t2 = this.height;
+      return "number" == typeof t2 ? t2 + "px" : "string" == typeof t2 ? (t2.includes("px") || t2.includes("vh"), t2) : null;
     }
     applyLayout() {
-      this.slider.classList.remove("pagiflow-row", "pagiflow-column"),
-        this.slider.classList.add(
-          "vertical" === this.direction ? "pagiflow-column" : "pagiflow-row",
-        ),
-        this.slider.classList.add(
-          this.grid ? "pagiflow-grid" : "pagiflow-normal",
-        );
-      const t = this._isFadeActive();
-      this.slider.classList.toggle("pagiflow-fade-mode", t);
-      const i = this.wrapper.querySelector(".pagiflow-viewport");
-      if (t && i) {
-        let t = this.height;
-        "number" == typeof t && (t += "px"),
-          i.style.setProperty("--pagiflow-height", t);
+      this.slider.classList.remove("pagiflow-row", "pagiflow-column"), this.slider.classList.add(
+        "vertical" === this.direction ? "pagiflow-column" : "pagiflow-row"
+      ), this.slider.classList.add(
+        this.grid ? "pagiflow-grid" : "pagiflow-normal"
+      );
+      const t2 = this._isFadeActive();
+      this.slider.classList.toggle("pagiflow-fade-mode", t2);
+      const i2 = this.wrapper.querySelector(".pagiflow-viewport");
+      if (t2 && i2) {
+        let t3 = this.height;
+        "number" == typeof t3 && (t3 += "px"), i2.style.setProperty("--pagiflow-height", t3);
       }
-      const e = this.currentPerSlide,
-        s = this.gap;
-      if (
-        (this.slider.style.setProperty("--pagiflow-gap", `${s}px`),
-          !this.grid || this.autoScroll || this.thumbnailsEnabled)
-      ) {
-        let t = null,
-          i = null;
+      const e2 = this.currentPerSlide, s2 = this.gap;
+      if (this.slider.style.setProperty("--pagiflow-gap", `${s2}px`), !this.grid || this.autoScroll || this.thumbnailsEnabled) {
+        let t3 = null, i3 = null;
         if ("vertical" == this.direction) {
-          let s = this.grid ? Math.ceil(e / this.gridColumns) : e,
-            n = this.height;
-          if ("number" == typeof n) t = (n - this.gap * (s - 1)) / s + "px";
-          else if ("string" == typeof n && n.includes("px")) {
-            t = (parseFloat(n) - this.gap * (s - 1)) / s + "px";
-          } else if ("string" == typeof n && n.includes("vh")) {
-            t = `calc((${parseFloat(n)}vh - ${this.gap * (s - 1)}px) / ${s})`;
+          let s3 = this.grid ? Math.ceil(e2 / this.gridColumns) : e2, n2 = this.height;
+          if ("number" == typeof n2) t3 = (n2 - this.gap * (s3 - 1)) / s3 + "px";
+          else if ("string" == typeof n2 && n2.includes("px")) {
+            t3 = (parseFloat(n2) - this.gap * (s3 - 1)) / s3 + "px";
+          } else if ("string" == typeof n2 && n2.includes("vh")) {
+            t3 = `calc((${parseFloat(n2)}vh - ${this.gap * (s3 - 1)}px) / ${s3})`;
           }
-          i = "100%";
+          i3 = "100%";
         } else
-          i =
-            1 === this.currentPerSlide
-              ? "100%"
-              : `calc((100% - ${this.gap * (this.currentPerSlide - 1)}px) / ${this.currentPerSlide
-              })`;
-        i && this.slider.style.setProperty("--pagiflow-item-width", i),
-          t && this.slider.style.setProperty("--pagiflow-item-height", t);
+          i3 = 1 === this.currentPerSlide ? "100%" : `calc((100% - ${this.gap * (this.currentPerSlide - 1)}px) / ${this.currentPerSlide})`;
+        i3 && this.slider.style.setProperty("--pagiflow-item-width", i3), t3 && this.slider.style.setProperty("--pagiflow-item-height", t3);
       } else {
-        const t = this.gridColumns,
-          i = Math.ceil(this.currentPerSlide / t) * t;
-        this.originalItems.map((t) => t.cloneNode(!0));
-        this.slider.style.setProperty("--pagiflow-columns", t);
-        const e = this.originalItems.length;
-        let s = 0;
-        this.slides.forEach((t) => {
-          t.querySelectorAll("[data-placeholder]").forEach((t) => t.remove());
-          const n = t.children.length;
-          if (n < i) {
-            const o = i - n;
-            for (let i = 0; i < o; i++)
+        const t3 = this.gridColumns, i3 = Math.ceil(this.currentPerSlide / t3) * t3;
+        this.originalItems.map((t4) => t4.cloneNode(true));
+        this.slider.style.setProperty("--pagiflow-columns", t3);
+        const e3 = this.originalItems.length;
+        let s3 = 0;
+        this.slides.forEach((t4) => {
+          t4.querySelectorAll("[data-placeholder]").forEach((t5) => t5.remove());
+          const n2 = t4.children.length;
+          if (n2 < i3) {
+            const o2 = i3 - n2;
+            for (let i4 = 0; i4 < o2; i4++)
               if (this.gridFill) {
-                const n = i % e,
-                  o = this.originalItems[n].cloneNode(!0);
-                o.classList.add("pagiflow-item", "pagiflow-fill-item"),
-                  o.setAttribute("aria-hidden", "true"),
-                  o.setAttribute("data-placeholder", "true"),
-                  t.appendChild(o),
-                  s++;
+                const n3 = i4 % e3, o3 = this.originalItems[n3].cloneNode(true);
+                o3.classList.add("pagiflow-item", "pagiflow-fill-item"), o3.setAttribute("aria-hidden", "true"), o3.setAttribute("data-placeholder", "true"), t4.appendChild(o3), s3++;
               } else {
-                const i = document.createElement("div");
-                (i.className = "pagiflow-placeholder"),
-                  i.setAttribute("aria-hidden", "true"),
-                  i.setAttribute("data-placeholder", "true"),
-                  t.appendChild(i);
+                const i5 = document.createElement("div");
+                i5.className = "pagiflow-placeholder", i5.setAttribute("aria-hidden", "true"), i5.setAttribute("data-placeholder", "true"), t4.appendChild(i5);
               }
           }
         });
       }
       if (this.centerMode && !this.grid && "horizontal" === this.direction) {
         this.wrapper.classList.add("pagiflow-center-enabled");
-        const t = this._getPaddingValue(this.centerPadding);
-        this.slider.style.setProperty("--pagiflow-center-padding", t);
+        const t3 = this._getPaddingValue(this.centerPadding);
+        this.slider.style.setProperty("--pagiflow-center-padding", t3);
       } else
-        this.wrapper.classList.remove("pagiflow-center-enabled"),
-          this.slider.style.removeProperty("--pagiflow-center-padding");
+        this.wrapper.classList.remove("pagiflow-center-enabled"), this.slider.style.removeProperty("--pagiflow-center-padding");
     }
     buildPagination() {
       if (!this.paginate || this.autoScroll) return;
-      this.paginationEl ||
-        ((this.paginationEl = document.createElement("div")),
-          (this.paginationEl.className = "pagiflow-pagination"),
-          this.wrapper.appendChild(this.paginationEl));
-      const t = this.grid ? 1 : this.currentPerSlide,
-        i = (this.loop || this.cloneCount > 0)
-          ? this.slides.slice(this.cloneCount, -this.cloneCount)
-          : this.slides,
-        e = Math.ceil(i.length / t);
-      this.paginationEl.classList.toggle("pagiflow-pagination-hidden", e <= 1),
-        (this.paginationEl.innerHTML = ""),
-        (this.dots = []);
-      for (let s = 0; s < e; s++) {
-        const e = document.createElement("button");
-        (e.className = "pagiflow-dot"),
-          (e.type = "button"),
-          e.setAttribute("aria-label", `Go to slide ${s + 1}`),
-          0 === s && e.classList.add("active");
-        const n = () => {
-          const e = t;
-          let n = Math.min(s * e, i.length - t);
-          this.loop ? (this.index = n + this.cloneCount) : (this.index = n),
-            this.update(this);
+      this.paginationEl || (this.paginationEl = document.createElement("div"), this.paginationEl.className = "pagiflow-pagination", this.wrapper.appendChild(this.paginationEl));
+      const t2 = this.grid ? 1 : this.currentPerSlide, i2 = this.loop || this.cloneCount > 0 ? this.slides.slice(this.cloneCount, -this.cloneCount) : this.slides, e2 = Math.ceil(i2.length / t2);
+      this.paginationEl.classList.toggle("pagiflow-pagination-hidden", e2 <= 1), this.paginationEl.innerHTML = "", this.dots = [];
+      for (let s2 = 0; s2 < e2; s2++) {
+        const e3 = document.createElement("button");
+        e3.className = "pagiflow-dot", e3.type = "button", e3.setAttribute("aria-label", `Go to slide ${s2 + 1}`), 0 === s2 && e3.classList.add("active");
+        const n2 = () => {
+          const e4 = t2;
+          let n3 = Math.min(s2 * e4, i2.length - t2);
+          this.loop ? this.index = n3 + this.cloneCount : this.index = n3, this.update(this);
         };
-        e.addEventListener("click", (t) => {
-          t.preventDefault(), t.stopPropagation(), n();
-        }),
-          e.addEventListener(
-            "touchstart",
-            (t) => {
-              t.preventDefault(), t.stopPropagation(), n();
-            },
-            { passive: !1 },
-          ),
-          this.paginationEl.appendChild(e),
-          this.dots.push(e);
+        e3.addEventListener("click", (t3) => {
+          t3.preventDefault(), t3.stopPropagation(), n2();
+        }), e3.addEventListener(
+          "touchstart",
+          (t3) => {
+            t3.preventDefault(), t3.stopPropagation(), n2();
+          },
+          { passive: false }
+        ), this.paginationEl.appendChild(e3), this.dots.push(e3);
       }
     }
     updatePagination() {
       if (!this.dots.length) return;
-      const t = this._getRealIndex(),
-        i = this.grid ? 1 : this.currentPerSlide || 1,
-        e = (this.loop || this.cloneCount > 0)
-          ? this.slides.length - 2 * this.cloneCount
-          : this.slides.length,
-        s = this.dots.length;
-      let n;
+      const t2 = this._getRealIndex(), i2 = this.grid ? 1 : this.currentPerSlide || 1, e2 = this.loop || this.cloneCount > 0 ? this.slides.length - 2 * this.cloneCount : this.slides.length, s2 = this.dots.length;
+      let n2;
       if (this.loop) {
-        n = Math.floor(t / i);
-        t >= e - i && (n = s - 1);
+        n2 = Math.floor(t2 / i2);
+        t2 >= e2 - i2 && (n2 = s2 - 1);
       } else {
-        n = t >= e - i ? s - 1 : Math.floor(t / i);
+        n2 = t2 >= e2 - i2 ? s2 - 1 : Math.floor(t2 / i2);
       }
-      (n = Math.min(n, s - 1)),
-        this.dots.forEach((t, i) => t.classList.toggle("active", i === n));
+      n2 = Math.min(n2, s2 - 1), this.dots.forEach((t3, i3) => t3.classList.toggle("active", i3 === n2));
     }
     buildThumbnails() {
-      this.thumbnailsEl && this.thumbnailsEl.remove(),
-        (this.thumbnailsEl = document.createElement("div")),
-        (this.thumbnailsEl.className = "pagiflow-thumbnails"),
-        this.thumbnailsEl.classList.add(
-          `pagiflow-position-${this.thumbnailsPosition}`,
-        ),
-        (this.thumbItems = []),
-        this.originalItems.forEach((t, i) => {
-          const e = document.createElement("button");
-          (e.className = "pagiflow-thumb"),
-            (e.type = "button"),
-            e.setAttribute("aria-label", `Go to slide ${i + 1}`);
-          const s = t.querySelector("img");
-          if (s) {
-            const t = document.createElement("img");
-            (t.src = s.src),
-              (t.alt = s.alt || ""),
-              (t.loading = "lazy"),
-              e.appendChild(t);
-          } else e.textContent = (i + 1).toString();
-          this.thumbnailsEl.style.setProperty(
-            "--pagiflow-thumb-width",
-            this.thumbnailsThumbWidth,
-          ),
-            e.addEventListener(
-              "pointerdown",
-              (t) => {
-                ("mouse" === t.pointerType && 0 !== t.button) ||
-                  (t.stopPropagation(), this.goTo(i));
-              },
-              { passive: !1 },
-            ),
-            e.addEventListener("click", (t) => {
-              t.preventDefault(), this.goTo(i);
-            }),
-            this.thumbnailsEl.appendChild(e),
-            this.thumbItems.push(e);
-        });
-      const t = this.wrapper.querySelector(".pagiflow-thumbnails-wrapper"),
-        i = this.wrapper.querySelector(".pagiflow-viewport");
+      this.thumbnailsEl && this.thumbnailsEl.remove(), this.thumbnailsEl = document.createElement("div"), this.thumbnailsEl.className = "pagiflow-thumbnails", this.thumbnailsEl.classList.add(
+        `pagiflow-position-${this.thumbnailsPosition}`
+      ), this.thumbItems = [], this.originalItems.forEach((t3, i3) => {
+        const e2 = document.createElement("button");
+        e2.className = "pagiflow-thumb", e2.type = "button", e2.setAttribute("aria-label", `Go to slide ${i3 + 1}`);
+        const s2 = t3.querySelector("img");
+        if (s2) {
+          const t4 = document.createElement("img");
+          t4.src = s2.src, t4.alt = s2.alt || "", t4.loading = "lazy", e2.appendChild(t4);
+        } else e2.textContent = (i3 + 1).toString();
+        this.thumbnailsEl.style.setProperty(
+          "--pagiflow-thumb-width",
+          this.thumbnailsThumbWidth
+        ), e2.addEventListener(
+          "pointerdown",
+          (t4) => {
+            "mouse" === t4.pointerType && 0 !== t4.button || (t4.stopPropagation(), this.goTo(i3));
+          },
+          { passive: false }
+        ), e2.addEventListener("click", (t4) => {
+          t4.preventDefault(), this.goTo(i3);
+        }), this.thumbnailsEl.appendChild(e2), this.thumbItems.push(e2);
+      });
+      const t2 = this.wrapper.querySelector(".pagiflow-thumbnails-wrapper"), i2 = this.wrapper.querySelector(".pagiflow-viewport");
       switch (this.thumbnailsPosition) {
         case "top":
-          i.insertAdjacentElement("beforebegin", this.thumbnailsEl);
+          i2.insertAdjacentElement("beforebegin", this.thumbnailsEl);
           break;
         case "bottom":
-          i.insertAdjacentElement("afterend", this.thumbnailsEl);
+          i2.insertAdjacentElement("afterend", this.thumbnailsEl);
           break;
         case "left":
         case "right":
-          t.appendChild(this.thumbnailsEl);
+          t2.appendChild(this.thumbnailsEl);
           break;
         default:
-          t.insertAdjacentElement("afterend", this.thumbnailsEl);
+          t2.insertAdjacentElement("afterend", this.thumbnailsEl);
       }
       this.updateThumbnails();
     }
     updateThumbnails() {
-      if (
-        !this.thumbnailsEnabled ||
-        !this.thumbnailsEl ||
-        !this.thumbItems.length
-      )
+      if (!this.thumbnailsEnabled || !this.thumbnailsEl || !this.thumbItems.length)
         return;
-      this.thumbItems.forEach((t, i) => {
-        const e = i === this._getRealIndex();
-        t.classList.toggle("active", e),
-          t.setAttribute("aria-current", e ? "true" : "false");
+      this.thumbItems.forEach((t3, i3) => {
+        const e2 = i3 === this._getRealIndex();
+        t3.classList.toggle("active", e2), t3.setAttribute("aria-current", e2 ? "true" : "false");
       });
-      const t = this.thumbItems[this._getRealIndex()];
-      if (!t) return;
-      const i = this.thumbnailsEl;
-      if (
-        "left" === this.thumbnailsPosition ||
-        "right" === this.thumbnailsPosition
-      ) {
-        const e =
-          t.offsetTop - i.offsetTop - i.clientHeight / 2 + t.offsetHeight / 2;
-        i.scrollTo({ top: e, behavior: "smooth" });
+      const t2 = this.thumbItems[this._getRealIndex()];
+      if (!t2) return;
+      const i2 = this.thumbnailsEl;
+      if ("left" === this.thumbnailsPosition || "right" === this.thumbnailsPosition) {
+        const e2 = t2.offsetTop - i2.offsetTop - i2.clientHeight / 2 + t2.offsetHeight / 2;
+        i2.scrollTo({ top: e2, behavior: "smooth" });
       } else {
-        const e =
-          t.offsetLeft - i.offsetLeft - i.clientWidth / 2 + t.offsetWidth / 2;
-        i.scrollTo({ left: e, behavior: "smooth" });
+        const e2 = t2.offsetLeft - i2.offsetLeft - i2.clientWidth / 2 + t2.offsetWidth / 2;
+        i2.scrollTo({ left: e2, behavior: "smooth" });
       }
     }
-    update(t = null) {
+    update(t2 = null) {
       if (this.isLoopJumping) return;
       if (this.autoScroll) return;
-      const i = this.loop
-        ? this.slides.length - 1
-        : Math.max(0, this.slides.length - (this.grid ? 1 : this.currentPerSlide));
+      const i2 = this.loop ? this.slides.length - 1 : Math.max(0, this.slides.length - (this.grid ? 1 : this.currentPerSlide));
       if (!this.loop) {
         if (this.cloneCount > 0) {
           const minI = this.cloneCount;
           const maxI = this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide);
           this.index = Math.max(minI, Math.min(this.index, maxI));
         } else {
-          this.index = Math.max(0, Math.min(this.index, i));
+          this.index = Math.max(0, Math.min(this.index, i2));
         }
       }
       if (this.index < this.slides.length)
         if (this._isFadeActive()) this._applyFade();
         else {
-          (this.slider.style.willChange = "transform"),
-            (this.slider.style.transform = "translate3d(0,0,0)"),
-            (this.slider.style.transitionDuration =
-              (!1 === this.options.animate ? 0 : this.speed) + "ms");
-          const t = this.getTranslate();
-          if (!isFinite(t)) return;
-          const i = this.rtl ? 1 : -1,
-            e =
-              "vertical" === this.direction
-                ? `translate3d(0, -${t}px, 0)`
-                : `translate3d(${i * t}px, 0, 0)`;
-          if (
-            ((this.slider.style.transform = e),
-              !this.options.animate && this.loop && !this.isDragging)
-          ) {
-            const t = this.slides.length;
-            this.index >= t - this.cloneCount
-              ? this._silentJump(this.cloneCount)
-              : this.index < this.cloneCount &&
-              this._silentJump(t - this.cloneCount - 1);
+          this.slider.style.willChange = "transform", this.slider.style.transform = "translate3d(0,0,0)", this.slider.style.transitionDuration = (false === this.options.animate ? 0 : this.speed) + "ms";
+          const t3 = this.getTranslate();
+          if (!isFinite(t3)) return;
+          const i3 = this.rtl ? 1 : -1, e3 = "vertical" === this.direction ? `translate3d(0, -${t3}px, 0)` : `translate3d(${i3 * t3}px, 0, 0)`;
+          if (this.slider.style.transform = e3, !this.options.animate && this.loop && !this.isDragging) {
+            const t4 = this.slides.length;
+            this.index >= t4 - this.cloneCount ? this._silentJump(this.cloneCount) : this.index < this.cloneCount && this._silentJump(t4 - this.cloneCount - 1);
           }
         }
-      this.updatePagination(),
-        this.updateActiveSlide(),
-        this.updateNavState(),
-        this.updateThumbnails(),
-        this.lazyLoadEnabled &&
-        !("IntersectionObserver" in window) &&
-        this.lazyLoad();
-      const e = this._getRealIndex();
-      if (
-        (this._lastEmittedIndex !== e &&
-          ((this._lastEmittedIndex = e),
-            this._onSlideChange && this._onSlideChange(e)),
-          this.syncTarget && t !== this.syncTarget)
-      ) {
-        this._syncing = !0;
-        const t = this.syncTarget;
+      this.updatePagination(), this.updateActiveSlide(), this.updateNavState(), this.updateThumbnails(), this.lazyLoadEnabled && !("IntersectionObserver" in window) && this.lazyLoad();
+      const e2 = this._getRealIndex();
+      if (this._lastEmittedIndex !== e2 && (this._lastEmittedIndex = e2, this._onSlideChange && this._onSlideChange(e2)), this.syncTarget && t2 !== this.syncTarget) {
+        this._syncing = true;
+        const t3 = this.syncTarget;
         try {
-          if (!t._syncing) {
-            t._syncing = !0;
+          if (!t3._syncing) {
+            t3._syncing = true;
             try {
-              const i = t._getRealIndex(),
-                s = e,
-                n = this.slides.length - 2 * this.cloneCount;
-              let o = s - i;
-              if (this.loop && t.loop) {
-                if (
-                  (Math.abs(o) > n / 2 && (o = o > 0 ? o - n : o + n),
-                    "next" === this._lastDirection && o < 0 && (o += n),
-                    "prev" === this._lastDirection && o > 0 && (o -= n),
-                    (t.index += o),
-                    !t.options.animate && t.loop)
-                ) {
-                  const i = t.slides.length;
-                  t.index >= i - t.cloneCount
-                    ? t._silentJump(t.cloneCount)
-                    : t.index < t.cloneCount &&
-                    t._silentJump(i - t.cloneCount - 1);
+              const i3 = t3._getRealIndex(), s2 = e2, n2 = this.slides.length - 2 * this.cloneCount;
+              let o2 = s2 - i3;
+              if (this.loop && t3.loop) {
+                if (Math.abs(o2) > n2 / 2 && (o2 = o2 > 0 ? o2 - n2 : o2 + n2), "next" === this._lastDirection && o2 < 0 && (o2 += n2), "prev" === this._lastDirection && o2 > 0 && (o2 -= n2), t3.index += o2, !t3.options.animate && t3.loop) {
+                  const i4 = t3.slides.length;
+                  t3.index >= i4 - t3.cloneCount ? t3._silentJump(t3.cloneCount) : t3.index < t3.cloneCount && t3._silentJump(i4 - t3.cloneCount - 1);
                 }
               } else {
-                t.index = t.loop ? t._getLoopTargetIndex(s) : t.cloneCount + s;
+                t3.index = t3.loop ? t3._getLoopTargetIndex(s2) : t3.cloneCount + s2;
               }
-              t.update();
+              t3.update();
             } finally {
-              t._syncing = !1;
+              t3._syncing = false;
             }
           }
         } finally {
-          this._syncing = !1;
+          this._syncing = false;
         }
       }
     }
     _applyFade() {
-      this.slider.style.setProperty("--pagiflow-speed", `${this.speed}ms`),
-        (this.slider.style.transform = "none"),
-        (this.slider.style.transitionDuration = "0ms"),
-        this.slides.forEach((t, i) => {
-          const e = i === this.index;
-          (t.style.opacity = e ? "1" : "0"),
-            (t.style.pointerEvents = e ? "" : "none"),
-            (t.style.transitionDuration =
-              this.isLoopJumping || !1 === this.options.animate
-                ? "0ms"
-                : `${this.speed}ms`);
-        });
+      this.slider.style.setProperty("--pagiflow-speed", `${this.speed}ms`), this.slider.style.transform = "none", this.slider.style.transitionDuration = "0ms", this.slides.forEach((t2, i2) => {
+        const e2 = i2 === this.index;
+        t2.style.opacity = e2 ? "1" : "0", t2.style.pointerEvents = e2 ? "" : "none", t2.style.transitionDuration = this.isLoopJumping || false === this.options.animate ? "0ms" : `${this.speed}ms`;
+      });
     }
     updateActiveSlide() {
-      const t = this.grid && !this.autoScroll && !this.thumbnailsEnabled,
-        i = this.currentPerSlide;
-      this.slides.forEach((e, s) => {
-        let n;
-        if (
-          ((n = t ? s === this.index : s >= this.index && s < this.index + i),
-            e.classList.toggle("pagiflow-active", n),
-            n
-              ? (e.setAttribute("aria-hidden", "false"),
-                e.removeAttribute("inert"))
-              : (e.contains(document.activeElement) &&
-                document.activeElement.blur(),
-                e.setAttribute("aria-hidden", "true"),
-                e.setAttribute("inert", "")),
-            e.classList.remove("pagiflow-center-mode"),
-            this.centerMode)
-        ) {
-          s === this.index + Math.floor(i / 2) &&
-            e.classList.add("pagiflow-center-mode");
+      const t2 = this.grid && !this.autoScroll && !this.thumbnailsEnabled, i2 = this.currentPerSlide;
+      this.slides.forEach((e2, s2) => {
+        let n2;
+        if (n2 = t2 ? s2 === this.index : s2 >= this.index && s2 < this.index + i2, e2.classList.toggle("pagiflow-active", n2), n2 ? (e2.setAttribute("aria-hidden", "false"), e2.removeAttribute("inert")) : (e2.contains(document.activeElement) && document.activeElement.blur(), e2.setAttribute("aria-hidden", "true"), e2.setAttribute("inert", "")), e2.classList.remove("pagiflow-center-mode"), this.centerMode) {
+          s2 === this.index + Math.floor(i2 / 2) && e2.classList.add("pagiflow-center-mode");
         }
       });
     }
     _scheduleAnimationReset() {
-      clearTimeout(this._animationResetTimer),
-        (this._animationResetTimer = setTimeout(() => {
-          this.isAnimating = !1;
-        }, this.speed + 100));
+      clearTimeout(this._animationResetTimer), this._animationResetTimer = setTimeout(() => {
+        this.isAnimating = false;
+      }, this.speed + 100);
     }
     _bindLoopFix() {
       this._transitionEndListener = () => {
-        if (
-          (clearTimeout(this._animationResetTimer),
-            (this.isAnimating = !1),
-            !this.loop)
-        )
+        if (clearTimeout(this._animationResetTimer), this.isAnimating = false, !this.loop)
           return;
         if (this.isDragging) return;
-        if (!1 === this.options.animate) return;
-        const t = this.slides.length;
-        this.index >= t - this.cloneCount &&
-          requestAnimationFrame(() => {
-            this._silentJump(this.cloneCount);
-          }),
-          this.index < this.cloneCount &&
-          requestAnimationFrame(() => {
-            this._silentJump(t - this.cloneCount - 1);
-          });
+        if (false === this.options.animate) return;
+        const t2 = this.slides.length;
+        this.index >= t2 - this.cloneCount && requestAnimationFrame(() => {
+          this._silentJump(this.cloneCount);
+        }), this.index < this.cloneCount && requestAnimationFrame(() => {
+          this._silentJump(t2 - this.cloneCount - 1);
+        });
       };
       this.slider.addEventListener("transitionend", this._transitionEndListener);
     }
-    _silentJump(t) {
-      if (
-        ((this.isLoopJumping = !0),
-          (this.slider.style.transition = "none"),
-          (this.index = t),
-          this._isFadeActive())
-      )
-        this.slides.forEach((t, i) => {
-          const e = i === this.index;
-          (t.style.opacity = e ? "1" : "0"),
-            (t.style.pointerEvents = e ? "" : "none"),
-            (t.style.transitionDuration = "0ms");
+    _silentJump(t2) {
+      if (this.isLoopJumping = true, this.slider.style.transition = "none", this.index = t2, this._isFadeActive())
+        this.slides.forEach((t3, i2) => {
+          const e2 = i2 === this.index;
+          t3.style.opacity = e2 ? "1" : "0", t3.style.pointerEvents = e2 ? "" : "none", t3.style.transitionDuration = "0ms";
         });
       else {
-        const t = this.rtl && "vertical" !== this.direction ? 1 : -1,
-          i = this.getTranslate();
-        (this.slider.style.transform =
-          "vertical" === this.direction
-            ? `translate3d(0, -${i}px, 0)`
-            : `translate3d(${t * i}px, 0, 0)`),
-          this.slider.offsetHeight;
+        const t3 = this.rtl && "vertical" !== this.direction ? 1 : -1, i2 = this.getTranslate();
+        this.slider.style.transform = "vertical" === this.direction ? `translate3d(0, -${i2}px, 0)` : `translate3d(${t3 * i2}px, 0, 0)`, this.slider.offsetHeight;
       }
       requestAnimationFrame(() => {
-        !1 !== this.options.animate && (this.slider.style.transition = "");
-      }),
-        this.updateActiveSlide(),
-        this.updateNavState(),
-        this.updateThumbnails(),
-        (this.isLoopJumping = !1);
+        false !== this.options.animate && (this.slider.style.transition = "");
+      }), this.updateActiveSlide(), this.updateNavState(), this.updateThumbnails(), this.isLoopJumping = false;
     }
     initLazyLoad() {
-      this.lazyLoadEnabled &&
-        ("IntersectionObserver" in window
-          ? this.createLazyObserver()
-          : this.lazyLoad());
+      this.lazyLoadEnabled && ("IntersectionObserver" in window ? this.createLazyObserver() : this.lazyLoad());
     }
     lazyLoad() {
-      this.lazyLoadEnabled &&
-        [-1, 0, 1].forEach((t) => {
-          const i = this.index + t;
-          if (i < 0 || i >= this.slides.length) return;
-          const e = this.slides[i];
-          e &&
-            e.querySelectorAll("img[data-src]").forEach((t) => {
-              if (t.classList.contains("pagiflow-lazy-loading")) return;
-              const i = t.dataset.src;
-              if (!i) return;
-              t.classList.add("pagiflow-lazy-loading");
-              const e = new Image();
-              (e.src = i),
-                (e.onload = () => {
-                  (t.src = i),
-                    t.removeAttribute("data-src"),
-                    t.classList.remove(
-                      "pagiflow-lazy",
-                      "pagiflow-lazy-loading",
-                    );
-                }),
-                (e.onerror = () => {
-                  t.removeAttribute("data-src"),
-                    t.classList.remove(
-                      "pagiflow-lazy",
-                      "pagiflow-lazy-loading",
-                    );
-                });
-            });
+      this.lazyLoadEnabled && [-1, 0, 1].forEach((t2) => {
+        const i2 = this.index + t2;
+        if (i2 < 0 || i2 >= this.slides.length) return;
+        const e2 = this.slides[i2];
+        e2 && e2.querySelectorAll("img[data-src]").forEach((t3) => {
+          if (t3.classList.contains("pagiflow-lazy-loading")) return;
+          const i3 = t3.dataset.src;
+          if (!i3) return;
+          t3.classList.add("pagiflow-lazy-loading");
+          const e3 = new Image();
+          e3.src = i3, e3.onload = () => {
+            t3.src = i3, t3.removeAttribute("data-src"), t3.classList.remove(
+              "pagiflow-lazy",
+              "pagiflow-lazy-loading"
+            );
+          }, e3.onerror = () => {
+            t3.removeAttribute("data-src"), t3.classList.remove(
+              "pagiflow-lazy",
+              "pagiflow-lazy-loading"
+            );
+          };
         });
+      });
     }
     createLazyObserver() {
-      this.lazyLoadEnabled &&
-        ("IntersectionObserver" in window
-          ? (this.lazyObserver ||
-            ((this.viewport =
-              this.wrapper.querySelector(".pagiflow-viewport")),
-              (this.lazyObserver = new IntersectionObserver(
-                (t) => {
-                  t.forEach((t) => {
-                    if (!t.isIntersecting) return;
-                    const i = t.target,
-                      e = i.dataset.src;
-                    if (!e) return void this.lazyObserver.unobserve(i);
-                    i.classList.add("pagiflow-lazy-loading");
-                    const s = new Image();
-                    (s.src = e),
-                      (s.onload = () => {
-                        (i.src = e),
-                          i.removeAttribute("data-src"),
-                          i.classList.remove(
-                            "pagiflow-lazy",
-                            "pagiflow-lazy-loading",
-                          ),
-                          this.lazyObserver.unobserve(i);
-                      }),
-                      (s.onerror = () => {
-                        i.removeAttribute("data-src"),
-                          i.classList.remove(
-                            "pagiflow-lazy",
-                            "pagiflow-lazy-loading",
-                          ),
-                          this.lazyObserver.unobserve(i);
-                      });
-                  });
-                },
-                {
-                  root: this.viewport || null,
-                  rootMargin: "100px",
-                  threshold: 0.1,
-                },
-              ))),
-            this.slider.querySelectorAll("img[data-src]").forEach((t) => {
-              this.lazyObserver.observe(t);
-            }))
-          : this.lazyLoad());
+      this.lazyLoadEnabled && ("IntersectionObserver" in window ? (this.lazyObserver || (this.viewport = this.wrapper.querySelector(".pagiflow-viewport"), this.lazyObserver = new IntersectionObserver(
+        (t2) => {
+          t2.forEach((t3) => {
+            if (!t3.isIntersecting) return;
+            const i2 = t3.target, e2 = i2.dataset.src;
+            if (!e2) return void this.lazyObserver.unobserve(i2);
+            i2.classList.add("pagiflow-lazy-loading");
+            const s2 = new Image();
+            s2.src = e2, s2.onload = () => {
+              i2.src = e2, i2.removeAttribute("data-src"), i2.classList.remove(
+                "pagiflow-lazy",
+                "pagiflow-lazy-loading"
+              ), this.lazyObserver.unobserve(i2);
+            }, s2.onerror = () => {
+              i2.removeAttribute("data-src"), i2.classList.remove(
+                "pagiflow-lazy",
+                "pagiflow-lazy-loading"
+              ), this.lazyObserver.unobserve(i2);
+            };
+          });
+        },
+        {
+          root: this.viewport || null,
+          rootMargin: "100px",
+          threshold: 0.1
+        }
+      )), this.slider.querySelectorAll("img[data-src]").forEach((t2) => {
+        this.lazyObserver.observe(t2);
+      })) : this.lazyLoad());
     }
     startAutoScroll() {
       if (this.autoScrollRAF) return;
       if (this.isPaused) return;
-      const t = "vertical" !== this.direction;
-      let i = "left" === (this.autoScrollDirection || "left").trim() ? 1 : -1;
-      this.rtl && (i *= -1);
-      const e = this.autoScrollSpeed * i;
+      const t2 = "vertical" !== this.direction;
+      let i2 = "left" === (this.autoScrollDirection || "left").trim() ? 1 : -1;
+      this.rtl && (i2 *= -1);
+      const e2 = this.autoScrollSpeed * i2;
       this.slider.classList.add("pagiflow-no-transition");
-      const n = () => {
+      const n2 = () => {
         if (this.isPaused || !this.autoScroll)
           return void (this.autoScrollRAF = null);
-        const s = (t ? this.slider.scrollWidth : this.slider.scrollHeight) / 2;
-        if (s <= 0) return void (this.autoScrollRAF = requestAnimationFrame(n));
-        (this.autoScrollOffset += e),
-          (this.autoScrollOffset = ((this.autoScrollOffset % s) + s) % s);
-        const i = t
-          ? `translate3d(-${this.autoScrollOffset}px, 0, 0)`
-          : `translate3d(0, -${this.autoScrollOffset}px, 0)`;
-        (this.slider.style.transform = i),
-          (this.autoScrollRAF = requestAnimationFrame(n));
+        const s2 = (t2 ? this.slider.scrollWidth : this.slider.scrollHeight) / 2;
+        if (s2 <= 0) return void (this.autoScrollRAF = requestAnimationFrame(n2));
+        this.autoScrollOffset += e2, this.autoScrollOffset = (this.autoScrollOffset % s2 + s2) % s2;
+        const i3 = t2 ? `translate3d(-${this.autoScrollOffset}px, 0, 0)` : `translate3d(0, -${this.autoScrollOffset}px, 0)`;
+        this.slider.style.transform = i3, this.autoScrollRAF = requestAnimationFrame(n2);
       };
-      n();
+      n2();
     }
     startAutoplay() {
-      !this.autoplay ||
-        this.isPaused ||
-        this.slides.length <= 1 ||
-        this.autoScroll ||
-        (this.stopAutoplay(),
-          (this.autoTimer = setInterval(() => {
-            this.isDragging || this.next();
-          }, this.autoplayDelay)));
+      !this.autoplay || this.isPaused || this.slides.length <= 1 || this.autoScroll || (this.stopAutoplay(), this.autoTimer = setInterval(() => {
+        this.isDragging || this.next();
+      }, this.autoplayDelay));
     }
     stopAutoplay() {
-      this.autoTimer &&
-        (clearInterval(this.autoTimer), (this.autoTimer = null));
+      this.autoTimer && (clearInterval(this.autoTimer), this.autoTimer = null);
     }
     bindEvents() {
-      this.prevBtn &&
-        this._navPrevPD &&
-        this.prevBtn.removeEventListener("pointerdown", this._navPrevPD),
-        this.nextBtn &&
-        this._navNextPD &&
-        this.nextBtn.removeEventListener("pointerdown", this._navNextPD);
-      const t = (t, i) => {
-        if ("mouse" === t.pointerType && 0 !== t.button) return;
-        t.preventDefault();
-        const e = "prev" === i ? this.prevBtn : this.nextBtn;
-        !e ||
-          e.disabled ||
-          e.classList.contains("disabled") ||
-          ("prev" === i ? this.prev() : this.next(), this.updateNavState());
+      this.prevBtn && this._navPrevPD && this.prevBtn.removeEventListener("pointerdown", this._navPrevPD), this.nextBtn && this._navNextPD && this.nextBtn.removeEventListener("pointerdown", this._navNextPD);
+      const t2 = (t3, i2) => {
+        if ("mouse" === t3.pointerType && 0 !== t3.button) return;
+        t3.preventDefault();
+        const e2 = "prev" === i2 ? this.prevBtn : this.nextBtn;
+        !e2 || e2.disabled || e2.classList.contains("disabled") || ("prev" === i2 ? this.prev() : this.next(), this.updateNavState());
       };
-      (this._navPrevPD = (i) => t(i, "prev")),
-        (this._navNextPD = (i) => t(i, "next")),
-        this.prevBtn &&
-        this.prevBtn.addEventListener("pointerdown", this._navPrevPD, {
-          passive: !1,
-        }),
-        this.nextBtn &&
-        this.nextBtn.addEventListener("pointerdown", this._navNextPD, {
-          passive: !1,
-        });
+      this._navPrevPD = (i2) => t2(i2, "prev"), this._navNextPD = (i2) => t2(i2, "next"), this.prevBtn && this.prevBtn.addEventListener("pointerdown", this._navPrevPD, {
+        passive: false
+      }), this.nextBtn && this.nextBtn.addEventListener("pointerdown", this._navNextPD, {
+        passive: false
+      });
     }
     bindSwipe() {
       if (this.autoScroll) return;
       if (this.slides.length <= 1) return;
       if (this._swipeInitialized) return;
-      this._swipeInitialized = !0;
-      this.slider.addEventListener("dragstart", (e) => e.preventDefault());
-      let t = 0,
-        i = 0,
-        e = 0,
-        s = 0;
-      const n = (t) => (t.touches ? t.touches[0] : t),
-        o = (o) => {
-          if (this.isDragLocked) return;
-          if (!this.isDragging) return;
-          if (o.type === "mousemove" && 0 === o.buttons)
-            return void this._onMouseUp(o);
-          const l = n(o);
-          if (
-            ((this.currentX = l.clientX),
-              (this.currentY = l.clientY),
-              this._isFadeActive())
-          )
-            return;
-          if (!1 === this.options.animate) return;
-          const r =
-            "vertical" === this.direction ? this.currentY : this.currentX;
-          let a =
-            r - ("vertical" === this.direction ? this.startY : this.startX);
-          if (this.syncTarget && !this._syncing) {
-            const t = r - i;
-            Math.abs(t) > 0 && (this._lastDirection = t < 0 ? "next" : "prev");
-          }
-          this.rtl && "vertical" !== this.direction && (a *= -1);
-          const h = Date.now(),
-            d = h - t;
-          d > 0 && ((e = (r - i) / d), (i = r), (t = h));
-          let u = a;
-          const c = this.getSlideSize(),
-            p = this.slides.length - 2 * this.cloneCount,
-            m =
-              (this.slides.length,
-                this.currentPerSlide,
-                c * (this.cloneCount - p)),
-            g = c * (this.cloneCount + p);
-          let v = s - u;
-          this.loop &&
-            (v < m && (u = s - m + 0.3 * (v - m)),
-              v > g && (u = s - g + 0.3 * (v - g))),
-            this.loop ||
-            ((((this.cloneCount ? this.index <= this.cloneCount : 0 === this.index) && a > 0) ||
-              ((this.cloneCount ? this.index >= this.slides.length - this.cloneCount - 1 : this.index >= this.slides.length - 1) && a < 0)) &&
-              (u *= 0.4));
-          const y = this.rtl && "vertical" !== this.direction ? 1 : -1,
-            b =
-              "vertical" === this.direction
-                ? `translate3d(0, -${s - u}px, 0)`
-                : `translate3d(${y * (s - u)}px, 0, 0)`;
-          if (
-            ((this.slider.style.transform = b),
-              this.syncTarget && !this._syncing)
-          ) {
-            const t = this.getSlideSize();
-            let i,
-              e = s - a,
-              n = Math.round(e / t);
-            if (this.loop) {
-              const t = this.slides.length - 2 * this.cloneCount;
-              i = (((n - this.cloneCount) % t) + t) % t;
-            } else i = Math.max(0, Math.min(n, this.slides.length - 1));
-          }
-        },
-        l = () => {
-          if ((this.wrapper.classList.remove("grabbing"), !this.isDragging))
-            return;
-          (this.isDragging = !1), window.getSelection().removeAllRanges();
-          const t = "vertical" === this.direction;
-          let i =
-            (t ? this.currentY : this.currentX) -
-            (t ? this.startY : this.startX);
-          if ((this.rtl && !t && (i *= -1), this._isFadeActive())) {
-            return (
-              i < -t ? this.next() : i > t && this.prev(),
-              void this.startAutoplay()
-            );
-          }
-          this.syncTarget &&
-            !this._syncing &&
-            (this._lastDirection = i < 0 ? "next" : "prev");
-          const s = this.getSlideSize(),
-            n = this.getTranslate();
-          let o = 120 * e;
-          o = Math.max(-s, Math.min(o, s));
-          let l = n - i - o;
-          if (!this.loop) {
-            if (this.cloneCount > 0) {
-              const minL = this.cloneCount * s;
-              const maxL = (this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide)) * s;
-              l = Math.max(minL, Math.min(l, maxL));
-            } else {
-              const t =
-                (this.slides.length - (this.grid ? 1 : this.currentPerSlide)) * s;
-              l = Math.max(0, Math.min(l, t));
-            }
-          }
-          let r,
-            a = l / s;
-          const h = 0.15 * s;
-          if (
-            ((r =
-              Math.abs(i) > h
-                ? i > 0
-                  ? Math.floor(a)
-                  : Math.ceil(a)
-                : this.index),
-              this.loop)
-          ) {
-            const t = 0,
-              i = this.slides.length - 1;
-            this.index = Math.max(t, Math.min(r, i));
+      this._swipeInitialized = true;
+      this.slider.addEventListener("dragstart", (e3) => e3.preventDefault());
+      let t2 = 0, i2 = 0, e2 = 0, s2 = 0;
+      const n2 = (t3) => t3.touches ? t3.touches[0] : t3, o2 = (o3) => {
+        if (this.isDragLocked) return;
+        if (!this.isDragging) return;
+        if (o3.type === "mousemove" && 0 === o3.buttons)
+          return void this._onMouseUp(o3);
+        const l2 = n2(o3);
+        if (this.currentX = l2.clientX, this.currentY = l2.clientY, this._isFadeActive())
+          return;
+        if (false === this.options.animate) return;
+        const r = "vertical" === this.direction ? this.currentY : this.currentX;
+        let a = r - ("vertical" === this.direction ? this.startY : this.startX);
+        if (this.syncTarget && !this._syncing) {
+          const t3 = r - i2;
+          Math.abs(t3) > 0 && (this._lastDirection = t3 < 0 ? "next" : "prev");
+        }
+        this.rtl && "vertical" !== this.direction && (a *= -1);
+        const h = Date.now(), d = h - t2;
+        d > 0 && (e2 = (r - i2) / d, i2 = r, t2 = h);
+        let u = a;
+        const c = this.getSlideSize(), p = this.slides.length - 2 * this.cloneCount, m = (this.slides.length, this.currentPerSlide, c * (this.cloneCount - p)), g = c * (this.cloneCount + p);
+        let v = s2 - u;
+        this.loop && (v < m && (u = s2 - m + 0.3 * (v - m)), v > g && (u = s2 - g + 0.3 * (v - g))), this.loop || ((this.cloneCount ? this.index <= this.cloneCount : 0 === this.index) && a > 0 || (this.cloneCount ? this.index >= this.slides.length - this.cloneCount - 1 : this.index >= this.slides.length - 1) && a < 0) && (u *= 0.4);
+        const y = this.rtl && "vertical" !== this.direction ? 1 : -1, b = "vertical" === this.direction ? `translate3d(0, -${s2 - u}px, 0)` : `translate3d(${y * (s2 - u)}px, 0, 0)`;
+        if (this.slider.style.transform = b, this.syncTarget && !this._syncing) {
+          const t3 = this.getSlideSize();
+          let i3, e3 = s2 - a, n3 = Math.round(e3 / t3);
+          if (this.loop) {
+            const t4 = this.slides.length - 2 * this.cloneCount;
+            i3 = ((n3 - this.cloneCount) % t4 + t4) % t4;
+          } else i3 = Math.max(0, Math.min(n3, this.slides.length - 1));
+        }
+      }, l = () => {
+        if (this.wrapper.classList.remove("grabbing"), !this.isDragging)
+          return;
+        const t3 = "vertical" === this.direction;
+        let i3 = (t3 ? this.currentY : this.currentX) - (t3 ? this.startY : this.startX);
+        if (Math.abs(i3) > 5) { this._wasDragging = true; setTimeout(() => this._wasDragging = false, 50); }
+        this.isDragging = false, window.getSelection().removeAllRanges();
+        if (this.rtl && !t3 && (i3 *= -1), this._isFadeActive()) {
+          return i3 < -t3 ? this.next() : i3 > t3 && this.prev(), void this.startAutoplay();
+        }
+        this.syncTarget && !this._syncing && (this._lastDirection = i3 < 0 ? "next" : "prev");
+        const s3 = this.getSlideSize(), n3 = this.getTranslate();
+        let o3 = 120 * e2;
+        o3 = Math.max(-s3, Math.min(o3, s3));
+        let l2 = n3 - i3 - o3;
+        if (!this.loop) {
+          if (this.cloneCount > 0) {
+            const minL = this.cloneCount * s3;
+            const maxL = (this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide)) * s3;
+            l2 = Math.max(minL, Math.min(l2, maxL));
           } else {
-            if (this.cloneCount > 0) {
-              const minIndex = this.cloneCount;
-              const maxIndex = this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide);
-              this.index = Math.max(minIndex, Math.min(r, maxIndex));
-            } else {
-              const t = Math.max(
-                0,
-                this.slides.length - (this.grid ? 1 : this.currentPerSlide),
-              );
-              this.index = Math.max(0, Math.min(r, t));
-            }
+            const t4 = (this.slides.length - (this.grid ? 1 : this.currentPerSlide)) * s3;
+            l2 = Math.max(0, Math.min(l2, t4));
           }
-          (this.slider.style.transition =
-            !1 === this.options.animate ? "none" : `${this.speed}ms ease-out`),
-            this.update(),
-            this.startAutoplay();
-        };
-      (this._onSwipeStart = (o) => {
+        }
+        let r, a = l2 / s3;
+        const h = 0.15 * s3;
+        if (r = Math.abs(i3) > h ? i3 > 0 ? Math.floor(a) : Math.ceil(a) : this.index, this.loop) {
+          const t4 = 0, i4 = this.slides.length - 1;
+          this.index = Math.max(t4, Math.min(r, i4));
+        } else {
+          if (this.cloneCount > 0) {
+            const minIndex = this.cloneCount;
+            const maxIndex = this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide);
+            this.index = Math.max(minIndex, Math.min(r, maxIndex));
+          } else {
+            const t4 = Math.max(
+              0,
+              this.slides.length - (this.grid ? 1 : this.currentPerSlide)
+            );
+            this.index = Math.max(0, Math.min(r, t4));
+          }
+        }
+        this.slider.style.transition = false === this.options.animate ? "none" : `${this.speed}ms ease-out`, this.update(), this.startAutoplay();
+      };
+      this._onSwipeStart = (o3) => {
         const r = Date.now();
-        if (
-          (this.dragTimestamps.push(r),
-            (this.dragTimestamps = this.dragTimestamps.filter(
-              (t) => r - t < 1500,
-            )),
-            this.dragTimestamps.length > 6 || this.isDragLocked)
-        )
-          return (
-            (this.isDragLocked = !0),
-            (this.isDragging = !1),
-            this.wrapper.classList.remove("grabbing"),
-            this.wrapper.classList.add("pagiflow-drag-locked"),
-            this.update(),
-            void setTimeout(() => {
-              (this.isDragLocked = !1),
-                this.wrapper.classList.remove("pagiflow-drag-locked"),
-                (this.dragTimestamps = []);
-            }, 2500)
-          );
-        const l = n(o);
-        o.target.closest("button, a, .pagiflow-dot") ||
-          ((this.isDragging = !0),
-            this.wrapper.classList.add("grabbing"),
-            (this.startX = l.clientX),
-            (this.startY = l.clientY),
-            (this.currentX = this.startX),
-            (this.currentY = this.startY),
-            (i = "vertical" === this.direction ? this.startY : this.startX),
-            (e = 0),
-            (t = Date.now()),
-            this._isFadeActive() ||
-            ((s = this.getTranslate()),
-              (this.slider.style.transition = "none")),
-            this.stopAutoplay());
-      }),
-        (this._onMouseMove = o),
-        (this._onMouseUp = l),
-        (this._onTouchMove = o),
-        (this._onTouchEnd = l),
-        this.wrapper.addEventListener("mousedown", this._onSwipeStart),
-        this.wrapper.addEventListener("touchstart", this._onSwipeStart, {
-          passive: !0,
-        }),
-        window.addEventListener("mousemove", this._onMouseMove),
-        window.addEventListener("mouseup", this._onMouseUp),
-        window.addEventListener("touchmove", this._onTouchMove, {
-          passive: !0,
-        }),
-        window.addEventListener("touchend", this._onTouchEnd),
-        window.addEventListener("touchcancel", this._onTouchEnd);
+        if (this.dragTimestamps.push(r), this.dragTimestamps = this.dragTimestamps.filter(
+          (t3) => r - t3 < 1500
+        ), this.dragTimestamps.length > 6 || this.isDragLocked)
+          return this.isDragLocked = true, this.isDragging = false, this.wrapper.classList.remove("grabbing"), this.wrapper.classList.add("pagiflow-drag-locked"), this.update(), void setTimeout(() => {
+            this.isDragLocked = false, this.wrapper.classList.remove("pagiflow-drag-locked"), this.dragTimestamps = [];
+          }, 2500);
+        const l2 = n2(o3);
+        o3.target.closest("button, .pagiflow-dot") || (this.isDragging = true, this.wrapper.classList.add("grabbing"), this.startX = l2.clientX, this.startY = l2.clientY, this.currentX = this.startX, this.currentY = this.startY, i2 = "vertical" === this.direction ? this.startY : this.startX, e2 = 0, t2 = Date.now(), this._isFadeActive() || (s2 = this.getTranslate(), this.slider.style.transition = "none"), this.stopAutoplay());
+      }, this._onMouseMove = o2, this._onMouseUp = l, this._onTouchMove = o2, this._onTouchEnd = l, this.wrapper.addEventListener("mousedown", this._onSwipeStart), this.wrapper.addEventListener("touchstart", this._onSwipeStart, {
+        passive: true
+      }), window.addEventListener("mousemove", this._onMouseMove), window.addEventListener("mouseup", this._onMouseUp), window.addEventListener("touchmove", this._onTouchMove, {
+        passive: true
+      }), window.addEventListener("touchend", this._onTouchEnd), window.addEventListener("touchcancel", this._onTouchEnd), this.wrapper.addEventListener("click", (e) => { if (this._wasDragging) { e.preventDefault(); e.stopPropagation(); } }, true);
     }
     _bindResize() {
       if (this._onResize) return;
-      (this._onResize = ((t, i) => {
-        let e;
-        return (...s) => {
-          clearTimeout(e), (e = setTimeout(() => t(...s), i));
+      this._onResize = /* @__PURE__ */ ((t2, i2) => {
+        let e2;
+        return (...s2) => {
+          clearTimeout(e2), e2 = setTimeout(() => t2(...s2), i2);
         };
       })(() => {
         this.destroyed || this.rebuild();
-      }, 120)),
-        this._resizeBound ||
-        (window.addEventListener("resize", this._onResize),
-          (this._resizeBound = !0));
+      }, 120), this._resizeBound || (window.addEventListener("resize", this._onResize), this._resizeBound = true);
       if (!this._onLoad) {
         this._onLoad = () => {
           if (this.destroyed || this.autoScroll) return;
           this.update(this);
         };
-        window.addEventListener("load", this._onLoad, { once: !0 });
+        window.addEventListener("load", this._onLoad, { once: true });
       }
-      if (
-        !this._resizeObserver &&
-        "undefined" != typeof ResizeObserver &&
-        this.wrapper
-      ) {
-        let t = null;
-        const i = () => {
+      if (!this._resizeObserver && "undefined" != typeof ResizeObserver && this.wrapper) {
+        let t2 = null;
+        const i2 = () => {
           if (this.destroyed || this.autoScroll || this.isDragging) return;
-          clearTimeout(t),
-            (t = setTimeout(() => {
-              this.destroyed || this.update(this);
-            }, 40));
+          clearTimeout(t2), t2 = setTimeout(() => {
+            this.destroyed || this.update(this);
+          }, 40);
         };
-        (this._resizeObserver = new ResizeObserver(i)),
-          this._resizeObserver.observe(this.wrapper);
-        const e = this.wrapper.querySelector(".pagiflow-viewport");
-        e && this._resizeObserver.observe(e);
+        this._resizeObserver = new ResizeObserver(i2), this._resizeObserver.observe(this.wrapper);
+        const e2 = this.wrapper.querySelector(".pagiflow-viewport");
+        e2 && this._resizeObserver.observe(e2);
       }
     }
     getSlideSize() {
       if (!this.slides.length) return 0;
-      const t = this.slides[0].getBoundingClientRect();
-      return ("vertical" === this.direction ? t.height : t.width) + this.gap;
+      const t2 = this.slides[0].getBoundingClientRect();
+      return ("vertical" === this.direction ? t2.height : t2.width) + this.gap;
     }
     getTranslate() {
       if (!this.slides || !this.slides.length) return 0;
-      const t = this.slides[0];
-      if (!t) return 0;
-      const i = t.getBoundingClientRect();
-      let e = "vertical" === this.direction ? i.height : i.width;
-      if ((this.grid || (e += this.gap), !e || isNaN(e) || e <= 0)) return 0;
-      const s = this.loop
-        ? this.slides.length - 1
-        : (this.cloneCount > 0
-          ? this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide)
-          : Math.max(0, this.slides.length - (this.grid ? 1 : this.currentPerSlide)));
-      let n = this.index;
-      this.loop || (n = Math.max(this.cloneCount || 0, Math.min(n, s)));
-      const o = n * e;
-      return isFinite(o) ? o : 0;
+      const t2 = this.slides[0];
+      if (!t2) return 0;
+      const i2 = t2.getBoundingClientRect();
+      let e2 = "vertical" === this.direction ? i2.height : i2.width;
+      if (this.grid || (e2 += this.gap), !e2 || isNaN(e2) || e2 <= 0) return 0;
+      const s2 = this.loop ? this.slides.length - 1 : this.cloneCount > 0 ? this.cloneCount + (this.slides.length - 2 * this.cloneCount) - (this.grid ? 1 : this.currentPerSlide) : Math.max(0, this.slides.length - (this.grid ? 1 : this.currentPerSlide));
+      let n2 = this.index;
+      this.loop || (n2 = Math.max(this.cloneCount || 0, Math.min(n2, s2)));
+      const o2 = n2 * e2;
+      return isFinite(o2) ? o2 : 0;
     }
     destroy() {
-      return (
-        this.slides.length && this.goTo(0),
-        this._animTimer && (clearTimeout(this._animTimer), (this._animTimer = null)),
-        this._transitionEndListener &&
-        (this.slider.removeEventListener("transitionend", this._transitionEndListener),
-          (this._transitionEndListener = null)),
-        this.lazyObserver &&
-        (this.lazyObserver.disconnect(), (this.lazyObserver = null)),
-        this.stopAutoplay(),
-        this.autoScrollRAF &&
-        (cancelAnimationFrame(this.autoScrollRAF),
-          (this.autoScrollRAF = null)),
-        (this.autoScrollOffset = 0),
-        this.wrapper &&
-        (this.wrapper.removeEventListener("mouseenter", this._onMouseEnter),
-          this.wrapper.removeEventListener("mouseleave", this._onMouseLeave)),
-        this.prevBtn &&
-        this._navPrevPD &&
-        this.prevBtn.removeEventListener("pointerdown", this._navPrevPD),
-        this.nextBtn &&
-        this._navNextPD &&
-        this.nextBtn.removeEventListener("pointerdown", this._navNextPD),
-        this.wrapper &&
-        this._swipeInitialized &&
-        (this.wrapper.removeEventListener("mousedown", this._onSwipeStart),
-          this.wrapper.removeEventListener("touchstart", this._onSwipeStart)),
-        this._onMouseMove &&
-        (window.removeEventListener("mousemove", this._onMouseMove),
-          (this._onMouseMove = null)),
-        this._onMouseUp &&
-        (window.removeEventListener("mouseup", this._onMouseUp),
-          (this._onMouseUp = null)),
-        this._onTouchMove &&
-        (window.removeEventListener("touchmove", this._onTouchMove),
-          (this._onTouchMove = null)),
-        this._onTouchEnd &&
-        (window.removeEventListener("touchend", this._onTouchEnd),
-          (this._onTouchEnd = null)),
-        this.paginationEl?.parentNode &&
-        (this.paginationEl.remove(), (this.paginationEl = null)),
-        this.wrapper?.parentNode &&
-        (this.wrapper.parentNode.insertBefore(this.slider, this.wrapper),
-          this.wrapper.remove()),
-        this._onResize &&
-        (window.removeEventListener("resize", this._onResize),
-          (this._onResize = null)),
-        this._onLoad &&
-        (window.removeEventListener("load", this._onLoad),
-          (this._onLoad = null)),
-        this._resizeObserver &&
-        (this._resizeObserver.disconnect(), (this._resizeObserver = null)),
-        this._onKeyDown &&
-        this.wrapper?.removeEventListener("keydown", this._onKeyDown),
-        (this.wrapper = null),
-        (this.prevBtn = null),
-        (this.nextBtn = null),
-        (this.slides = []),
-        (this.dots = []),
-        (this.index = 0),
-        (this.isPaused = !1),
-        (this.isDragging = !1),
-        (this.isHovering = !1),
-        (this.isDragLocked = !1),
-        (this.dragTimestamps = []),
-        (this.currentPerSlide = null),
-        (this.autoTimer = null),
-        (this.autoScrollRAF = null),
-        (this.autoScrollOffset = 0),
-        (this._onSwipeStart = null),
-        (this._swipeInitialized = !1),
-        (this._resizeBound = !1),
-        (this.slider.dataset.pagiflowDestroyed = "true"),
-        (this.destroyed = !0),
-        (this.slider.style.willChange = "auto"),
-        this.slider.classList.add("pagiflow-overflow-hidden"),
-        this._createLoader(this.slider)
-      );
+      return this.slides.length && this.goTo(0), this._animTimer && (clearTimeout(this._animTimer), this._animTimer = null), this._transitionEndListener && (this.slider.removeEventListener("transitionend", this._transitionEndListener), this._transitionEndListener = null), this.lazyObserver && (this.lazyObserver.disconnect(), this.lazyObserver = null), this.stopAutoplay(), this.autoScrollRAF && (cancelAnimationFrame(this.autoScrollRAF), this.autoScrollRAF = null), this.autoScrollOffset = 0, this.wrapper && (this.wrapper.removeEventListener("mouseenter", this._onMouseEnter), this.wrapper.removeEventListener("mouseleave", this._onMouseLeave)), this.prevBtn && this._navPrevPD && this.prevBtn.removeEventListener("pointerdown", this._navPrevPD), this.nextBtn && this._navNextPD && this.nextBtn.removeEventListener("pointerdown", this._navNextPD), this.wrapper && this._swipeInitialized && (this.wrapper.removeEventListener("mousedown", this._onSwipeStart), this.wrapper.removeEventListener("touchstart", this._onSwipeStart)), this._onMouseMove && (window.removeEventListener("mousemove", this._onMouseMove), this._onMouseMove = null), this._onMouseUp && (window.removeEventListener("mouseup", this._onMouseUp), this._onMouseUp = null), this._onTouchMove && (window.removeEventListener("touchmove", this._onTouchMove), this._onTouchMove = null), this._onTouchEnd && (window.removeEventListener("touchend", this._onTouchEnd), this._onTouchEnd = null), this.paginationEl?.parentNode && (this.paginationEl.remove(), this.paginationEl = null), this.wrapper?.parentNode && (this.wrapper.parentNode.insertBefore(this.slider, this.wrapper), this.wrapper.remove()), this._onResize && (window.removeEventListener("resize", this._onResize), this._onResize = null), this._onLoad && (window.removeEventListener("load", this._onLoad), this._onLoad = null), this._resizeObserver && (this._resizeObserver.disconnect(), this._resizeObserver = null), this._onKeyDown && this.wrapper?.removeEventListener("keydown", this._onKeyDown), this.wrapper = null, this.prevBtn = null, this.nextBtn = null, this.slides = [], this.dots = [], this.index = 0, this.isPaused = false, this.isDragging = false, this.isHovering = false, this.isDragLocked = false, this.dragTimestamps = [], this.currentPerSlide = null, this.autoTimer = null, this.autoScrollRAF = null, this.autoScrollOffset = 0, this._onSwipeStart = null, this._swipeInitialized = false, this._resizeBound = false, this.slider.dataset.pagiflowDestroyed = "true", this.destroyed = true, this.slider.style.willChange = "auto", this.slider.classList.add("pagiflow-overflow-hidden"), this._createLoader(this.slider);
     }
-    reInit(t = {}) {
-      !this.destroyed && this.destroy(),
-        this._removeLoader(),
-        (this.options = {
-          ...this.options,
-          ...t,
-          responsive: {
-            ...(this.options.responsive || {}),
-            ...(t.responsive || {}),
-          },
-        });
-      let i = this.slider.closest(".pagiflow-wrapper"),
-        e = i ? i.querySelector(".pagiflow-viewport") : null;
-      if (i && e && e.contains(this.slider)) this.wrapper = i;
+    reInit(t2 = {}) {
+      !this.destroyed && this.destroy(), this._removeLoader(), this.options = {
+        ...this.options,
+        ...t2,
+        responsive: {
+          ...this.options.responsive || {},
+          ...t2.responsive || {}
+        }
+      };
+      let i2 = this.slider.closest(".pagiflow-wrapper"), e2 = i2 ? i2.querySelector(".pagiflow-viewport") : null;
+      if (i2 && e2 && e2.contains(this.slider)) this.wrapper = i2;
       else {
-        i &&
-          i.parentNode &&
-          (i.parentNode.insertBefore(this.slider, i), i.remove()),
-          (i = document.createElement("div")),
-          (i.className = "pagiflow-wrapper"),
-          (e = document.createElement("div")),
-          (e.className = "pagiflow-viewport");
-        const t = this.slider.parentNode;
-        t &&
-          (t.insertBefore(i, this.slider),
-            i.appendChild(e),
-            e.appendChild(this.slider)),
-          this.slider.classList.add("pagiflow-track"),
-          (this.wrapper = i);
+        i2 && i2.parentNode && (i2.parentNode.insertBefore(this.slider, i2), i2.remove()), i2 = document.createElement("div"), i2.className = "pagiflow-wrapper", e2 = document.createElement("div"), e2.className = "pagiflow-viewport";
+        const t3 = this.slider.parentNode;
+        t3 && (t3.insertBefore(i2, this.slider), i2.appendChild(e2), e2.appendChild(this.slider)), this.slider.classList.add("pagiflow-track"), this.wrapper = i2;
       }
-      return (
-        (this.index = 0),
-        (this.slides = []),
-        (this.dots = []),
-        (this.currentPerSlide = null),
-        (this.isPaused = !1),
-        (this.isDragging = !1),
-        (this.isHovering = !1),
-        (this.isDragLocked = !1),
-        (this.dragTimestamps = []),
-        (this.autoScrollOffset = 0),
-        (this.autoScrollRAF = null),
-        (this.autoTimer = null),
-        this.paginationEl &&
-        this.paginationEl.parentNode &&
-        (this.paginationEl.remove(), (this.paginationEl = null)),
-        this.rebuild(!0),
-        this.bindEvents(),
-        this.autoScroll || this.bindSwipe(),
-        this._bindNamedEvents(),
-        this.autoScroll
-          ? this.startAutoScroll()
-          : (this.update(this), this.startAutoplay()),
-        (this.destroyed = !1),
-        delete this.slider.dataset.pagiflowDestroyed,
-        this.slider.classList.remove("pagiflow-overflow-hidden"),
-        this
-      );
+      return this.index = 0, this.slides = [], this.dots = [], this.currentPerSlide = null, this.isPaused = false, this.isDragging = false, this.isHovering = false, this.isDragLocked = false, this.dragTimestamps = [], this.autoScrollOffset = 0, this.autoScrollRAF = null, this.autoTimer = null, this.paginationEl && this.paginationEl.parentNode && (this.paginationEl.remove(), this.paginationEl = null), this.rebuild(true), this.bindEvents(), this.autoScroll || this.bindSwipe(), this._bindNamedEvents(), this.autoScroll ? this.startAutoScroll() : (this.update(this), this.startAutoplay()), this.destroyed = false, delete this.slider.dataset.pagiflowDestroyed, this.slider.classList.remove("pagiflow-overflow-hidden"), this;
     }
     play() {
-      return (
-        (this.isPaused = !1), (this.autoplay = !0), this.startAutoplay(), this
-      );
+      return this.isPaused = false, this.autoplay = true, this.startAutoplay(), this;
     }
     pause() {
-      return (
-        (this.isPaused = !0),
-        this.stopAutoplay(),
-        this.autoScroll &&
-        this.autoScrollRAF &&
-        (cancelAnimationFrame(this.autoScrollRAF),
-          (this.autoScrollRAF = null)),
-        this
-      );
+      return this.isPaused = true, this.stopAutoplay(), this.autoScroll && this.autoScrollRAF && (cancelAnimationFrame(this.autoScrollRAF), this.autoScrollRAF = null), this;
     }
     resume() {
-      return (
-        (this.isPaused = !1),
-        this.autoScroll ? this.startAutoScroll() : this.startAutoplay(),
-        this
-      );
+      return this.isPaused = false, this.autoScroll ? this.startAutoScroll() : this.startAutoplay(), this;
     }
     togglePlayPause() {
       return this.isPaused ? this.play() : this.pause(), this;
@@ -1485,370 +774,188 @@ const Pagiflow = (() => {
       if (this.autoScroll || this.slides.length <= 1) return this;
       if (this.isAnimating) return this;
       this.syncTarget && !this._syncing && (this._lastDirection = "next");
-      const t = this.grid ? 1 : this.slidesToScroll || this.currentPerSlide,
-        i = (this.loop || this.cloneCount > 0)
-          ? this.slides.length - 2 * this.cloneCount
-          : this.slides.length,
-        e = this.grid ? 1 : this.currentPerSlide;
+      const t2 = this.grid ? 1 : this.slidesToScroll || this.currentPerSlide, i2 = this.loop || this.cloneCount > 0 ? this.slides.length - 2 * this.cloneCount : this.slides.length, e2 = this.grid ? 1 : this.currentPerSlide;
       if (this.loop)
-        (this.isAnimating = !0),
-          this._scheduleAnimationReset(),
-          (this.index += t);
+        this.isAnimating = true, this._scheduleAnimationReset(), this.index += t2;
       else {
-        const s = (this.cloneCount || 0) + Math.max(0, i - e);
-        if (this.index >= s) return this;
-        (this.isAnimating = !0),
-          this._scheduleAnimationReset(),
-          (this.index += t),
-          (this.index = Math.min(this.index, s));
+        const s2 = (this.cloneCount || 0) + Math.max(0, i2 - e2);
+        if (this.index >= s2) return this;
+        this.isAnimating = true, this._scheduleAnimationReset(), this.index += t2, this.index = Math.min(this.index, s2);
       }
       return this.update(this), this;
     }
     prev() {
       if (this.autoScroll || this.slides.length <= 1) return this;
       if (this.isAnimating) return this;
-      if (
-        (this.syncTarget && !this._syncing && (this._lastDirection = "prev"),
-          this.loop)
-      ) {
+      if (this.syncTarget && !this._syncing && (this._lastDirection = "prev"), this.loop) {
         if (this.index < this.cloneCount) return this;
       } else {
         const minBound = this.cloneCount || 0;
         if (this.index <= minBound) return this;
       }
-      (this.isAnimating = !0), this._scheduleAnimationReset();
-      const t = this.grid ? 1 : this.slidesToScroll || this.currentPerSlide;
-      return (
-        (this.index -= t),
-        this.loop || (this.index = Math.max(this.index, 0)),
-        this.update(this),
-        this
-      );
+      this.isAnimating = true, this._scheduleAnimationReset();
+      const t2 = this.grid ? 1 : this.slidesToScroll || this.currentPerSlide;
+      return this.index -= t2, this.loop || (this.index = Math.max(this.index, 0)), this.update(this), this;
     }
     _getRealIndex() {
       if (!this.loop) return this.cloneCount ? this.index - this.cloneCount : this.index;
-      const t = this.slides.length - 2 * this.cloneCount;
-      let i = this.index - this.cloneCount;
-      return (i = ((i % t) + t) % t), i;
+      const t2 = this.slides.length - 2 * this.cloneCount;
+      let i2 = this.index - this.cloneCount;
+      return i2 = (i2 % t2 + t2) % t2, i2;
     }
-    _getLoopTargetIndex(t) {
-      if (!this.loop) return t;
-      const i = this.slides.length - 2 * this.cloneCount,
-        e = this.cloneCount + t,
-        s = [e - i, e, e + i].filter((t) => t >= 0 && t < this.slides.length);
-      return s.length
-        ? s.reduce(
-          (t, i) =>
-            Math.abs(i - this.index) < Math.abs(t - this.index) ? i : t,
-          s[0],
-        )
-        : e;
+    _getLoopTargetIndex(t2) {
+      if (!this.loop) return t2;
+      const i2 = this.slides.length - 2 * this.cloneCount, e2 = this.cloneCount + t2, s2 = [e2 - i2, e2, e2 + i2].filter((t3) => t3 >= 0 && t3 < this.slides.length);
+      return s2.length ? s2.reduce(
+        (t3, i3) => Math.abs(i3 - this.index) < Math.abs(t3 - this.index) ? i3 : t3,
+        s2[0]
+      ) : e2;
     }
-    _getPaddingValue(t) {
-      return "number" == typeof t ? t + "px" : t || "0px";
+    _getPaddingValue(t2) {
+      return "number" == typeof t2 ? t2 + "px" : t2 || "0px";
     }
-    goTo(t, i = {}) {
+    goTo(t2, i2 = {}) {
       if (this.autoScroll || this.slides.length <= 1) return this;
-      const { silent: e = !1, instant: s = !1 } = i;
-      let n;
-      return (
-        (n = (this.loop || this.cloneCount > 0)
-          ? Math.max(0, Math.min(t, (this.slides.length - 2 * this.cloneCount) - 1)) + this.cloneCount
-          : Math.max(0, Math.min(t, this.slides.length - 1))),
-        (this.index = n),
-        e ||
-        (s
-          ? ((this.slider.style.transition = "none"),
-            this.update(this),
-            this.slider.offsetWidth,
-            (this.slider.style.transition = ""))
-          : this.update(this)),
-        this
-      );
+      const { silent: e2 = false, instant: s2 = false } = i2;
+      let n2;
+      return n2 = this.loop || this.cloneCount > 0 ? Math.max(0, Math.min(t2, this.slides.length - 2 * this.cloneCount - 1)) + this.cloneCount : Math.max(0, Math.min(t2, this.slides.length - 1)), this.index = n2, e2 || (s2 ? (this.slider.style.transition = "none", this.update(this), this.slider.offsetWidth, this.slider.style.transition = "") : this.update(this)), this;
     }
-    setOptions(t = {}, i = !1) {
+    setOptions(t2 = {}, i2 = false) {
       this.options = {
         ...this.options,
-        ...t,
+        ...t2,
         responsive: {
-          ...(this.options.responsive || {}),
-          ...(t.responsive || {}),
+          ...this.options.responsive || {},
+          ...t2.responsive || {}
         },
-        navigation: t.navigation || this.options.navigation,
+        navigation: t2.navigation || this.options.navigation
       };
-      const e =
-        i ||
-        void 0 !== t.itemsPerSlide ||
-        void 0 !== t.slidesToScroll ||
-        void 0 !== t.layout ||
-        void 0 !== t.gridColumns ||
-        void 0 !== t.gap ||
-        void 0 !== t.autoScroll ||
-        void 0 !== t.autoScrollSpeed ||
-        void 0 !== t.autoScrollDirection ||
-        void 0 !== t.autoplay ||
-        void 0 !== t.paginate ||
-        void 0 !== t.lazyLoad ||
-        void 0 !== t.navigation ||
-        void 0 !== t.nav ||
-        void 0 !== t.prevIcon ||
-        void 0 !== t.nextIcon ||
-        void 0 !== t.prevPosition ||
-        void 0 !== t.nextPosition ||
-        void 0 !== t.fade ||
-        void 0 !== t.centerMode ||
-        void 0 !== t.centerPadding ||
-        void 0 !== t.loop ||
-        void 0 !== t.rtl;
-      if (
-        (void 0 !== t.autoplay &&
-          ((this.autoplay = !!t.autoplay),
-            this.autoplay
-              ? this.isPaused || this.startAutoplay()
-              : this.stopAutoplay()),
-          void 0 !== t.pauseOnHover &&
-          ((this.pauseOnHover = !1 !== t.pauseOnHover),
-            this._bindNamedEvents()),
-          e)
-      )
-        this.stopAutoplay(),
-          this.autoScrollRAF &&
-          (cancelAnimationFrame(this.autoScrollRAF),
-            (this.autoScrollRAF = null),
-            (this.autoScrollOffset = 0)),
-          this.rebuild(!0);
+      const e2 = i2 || void 0 !== t2.itemsPerSlide || void 0 !== t2.slidesToScroll || void 0 !== t2.layout || void 0 !== t2.gridColumns || void 0 !== t2.gap || void 0 !== t2.autoScroll || void 0 !== t2.autoScrollSpeed || void 0 !== t2.autoScrollDirection || void 0 !== t2.autoplay || void 0 !== t2.paginate || void 0 !== t2.lazyLoad || void 0 !== t2.navigation || void 0 !== t2.nav || void 0 !== t2.prevIcon || void 0 !== t2.nextIcon || void 0 !== t2.prevPosition || void 0 !== t2.nextPosition || void 0 !== t2.fade || void 0 !== t2.centerMode || void 0 !== t2.centerPadding || void 0 !== t2.loop || void 0 !== t2.rtl;
+      if (void 0 !== t2.autoplay && (this.autoplay = !!t2.autoplay, this.autoplay ? this.isPaused || this.startAutoplay() : this.stopAutoplay()), void 0 !== t2.pauseOnHover && (this.pauseOnHover = false !== t2.pauseOnHover, this._bindNamedEvents()), e2)
+        this.stopAutoplay(), this.autoScrollRAF && (cancelAnimationFrame(this.autoScrollRAF), this.autoScrollRAF = null, this.autoScrollOffset = 0), this.rebuild(true);
       else {
-        if (
-          t.prevIcon ||
-          t.nextIcon ||
-          t.prevPosition ||
-          t.nextPosition ||
-          void 0 !== t.nav
-        ) {
-          const t = this.getResponsiveSettings();
-          this.createOrUpdateNav(t), this.updateNavState();
+        if (t2.prevIcon || t2.nextIcon || t2.prevPosition || t2.nextPosition || void 0 !== t2.nav) {
+          const t3 = this.getResponsiveSettings();
+          this.createOrUpdateNav(t3), this.updateNavState();
         }
-        t.paginationPosition &&
-          this.paginationEl &&
-          n(this.paginationEl, t.paginationPosition),
-          void 0 !== t.lazyLoad &&
-          ((this.lazyLoadEnabled = !!t.lazyLoad),
-            this.lazyLoadEnabled && this.createLazyObserver());
+        t2.paginationPosition && this.paginationEl && n(this.paginationEl, t2.paginationPosition), void 0 !== t2.lazyLoad && (this.lazyLoadEnabled = !!t2.lazyLoad, this.lazyLoadEnabled && this.createLazyObserver());
       }
       return this;
     }
     _bindNamedEvents() {
-      this.wrapper.removeEventListener("mouseenter", this._onMouseEnter),
-        this.wrapper.removeEventListener("mouseleave", this._onMouseLeave),
-        this.options.pauseOnHover &&
-        ((this._onMouseEnter = () => {
-          (this.isHovering = !0),
-            (this.isPaused = !0),
-            this.autoScrollRAF &&
-            (cancelAnimationFrame(this.autoScrollRAF),
-              (this.autoScrollRAF = null)),
-            this.stopAutoplay();
-        }),
-          (this._onMouseLeave = () => {
-            (this.isHovering = !1),
-              (this.isPaused = !1),
-              this.autoScroll ? this.startAutoScroll() : this.startAutoplay();
-          }),
-          this.wrapper.addEventListener("mouseenter", this._onMouseEnter),
-          this.wrapper.addEventListener("mouseleave", this._onMouseLeave));
+      this.wrapper.removeEventListener("mouseenter", this._onMouseEnter), this.wrapper.removeEventListener("mouseleave", this._onMouseLeave), this.options.pauseOnHover && (this._onMouseEnter = () => {
+        this.isHovering = true, this.isPaused = true, this.autoScrollRAF && (cancelAnimationFrame(this.autoScrollRAF), this.autoScrollRAF = null), this.stopAutoplay();
+      }, this._onMouseLeave = () => {
+        this.isHovering = false, this.isPaused = false, this.autoScroll ? this.startAutoScroll() : this.startAutoplay();
+      }, this.wrapper.addEventListener("mouseenter", this._onMouseEnter), this.wrapper.addEventListener("mouseleave", this._onMouseLeave));
     }
     _setupKeyboard() {
-      (this._onKeyDown = (t) => {
-        const i = this.getResponsiveSettings();
-        if (!i.keyboard) return;
-        if (i.autoScroll) return;
-        const e = "vertical" === i.direction,
-          s = document.activeElement?.tagName;
-        if (
-          !(
-            "INPUT" === s ||
-            "TEXTAREA" === s ||
-            "SELECT" === s ||
-            document.activeElement?.isContentEditable
-          )
-        )
-          if (e || ("ArrowUp" !== t.key && "ArrowDown" !== t.key)) {
-            if (!e || ("ArrowLeft" !== t.key && "ArrowRight" !== t.key)) {
-              if (!e) {
-                if ("ArrowLeft" === t.key)
-                  return t.preventDefault(), void this.prev();
-                if ("ArrowRight" === t.key)
-                  return t.preventDefault(), void this.next();
+      this._onKeyDown = (t2) => {
+        const i2 = this.getResponsiveSettings();
+        if (!i2.keyboard) return;
+        if (i2.autoScroll) return;
+        const e2 = "vertical" === i2.direction, s2 = document.activeElement?.tagName;
+        if (!("INPUT" === s2 || "TEXTAREA" === s2 || "SELECT" === s2 || document.activeElement?.isContentEditable))
+          if (e2 || "ArrowUp" !== t2.key && "ArrowDown" !== t2.key) {
+            if (!e2 || "ArrowLeft" !== t2.key && "ArrowRight" !== t2.key) {
+              if (!e2) {
+                if ("ArrowLeft" === t2.key)
+                  return t2.preventDefault(), void this.prev();
+                if ("ArrowRight" === t2.key)
+                  return t2.preventDefault(), void this.next();
               }
-              if (e) {
-                if ("ArrowUp" === t.key)
-                  return t.preventDefault(), void this.prev();
-                if ("ArrowDown" === t.key)
-                  return t.preventDefault(), void this.next();
+              if (e2) {
+                if ("ArrowUp" === t2.key)
+                  return t2.preventDefault(), void this.prev();
+                if ("ArrowDown" === t2.key)
+                  return t2.preventDefault(), void this.next();
               }
-              return "Home" === t.key
-                ? (t.preventDefault(), void this.goTo(0))
-                : "End" === t.key
-                  ? (t.preventDefault(),
-                    void this.goTo(
-                      this.slides.length - 2 * this.cloneCount - 1,
-                    ))
-                  : void 0;
+              return "Home" === t2.key ? (t2.preventDefault(), void this.goTo(0)) : "End" === t2.key ? (t2.preventDefault(), void this.goTo(
+                this.slides.length - 2 * this.cloneCount - 1
+              )) : void 0;
             }
-            t.preventDefault();
-          } else t.preventDefault();
-      }),
-        this.wrapper.addEventListener("keydown", this._onKeyDown);
+            t2.preventDefault();
+          } else t2.preventDefault();
+      }, this.wrapper.addEventListener("keydown", this._onKeyDown);
     }
-    _createLoader(t) {
-      t &&
-        (this.loader ||
-          ((this.loader = document.createElement("div")),
-            (this.loader.className = "pagiflow-loader"),
-            (this.loader.innerHTML = '<span class="pagiflow-spinner"></span>'),
-            t.appendChild(this.loader)));
+    _createLoader(t2) {
+      t2 && (this.loader || (this.loader = document.createElement("div"), this.loader.className = "pagiflow-loader", this.loader.innerHTML = '<span class="pagiflow-spinner"></span>', t2.appendChild(this.loader)));
     }
     _removeLoader() {
-      this.loader &&
-        (this.loader.classList.add("fade-out"),
-          setTimeout(() => {
-            this.loader?.parentNode &&
-              this.loader.parentNode.removeChild(this.loader),
-              (this.loader = null);
-          }, 200));
+      this.loader && (this.loader.classList.add("fade-out"), setTimeout(() => {
+        this.loader?.parentNode && this.loader.parentNode.removeChild(this.loader), this.loader = null;
+      }, 200));
     }
-    onSlideChange(t) {
-      return "function" == typeof t && (this._onSlideChange = t), this;
+    onSlideChange(t2) {
+      return "function" == typeof t2 && (this._onSlideChange = t2), this;
     }
-    html(t) {
-      if (void 0 === t)
-        return this.originalItems.map((t) => t.outerHTML).join("");
-      if ("dom" === t) return this.originalItems;
-      const i = document.createElement("div");
-      return (
-        (i.innerHTML = Array.isArray(t) ? t.join("") : t),
-        (this.originalItems = Array.from(i.children).map((t) =>
-          t.cloneNode(!0),
-        )),
-        (this.index = 0),
-        this.rebuild(!0),
-        this
-      );
+    html(t2) {
+      if (void 0 === t2)
+        return this.originalItems.map((t3) => t3.outerHTML).join("");
+      if ("dom" === t2) return this.originalItems;
+      const i2 = document.createElement("div");
+      return i2.innerHTML = Array.isArray(t2) ? t2.join("") : t2, this.originalItems = Array.from(i2.children).map(
+        (t3) => t3.cloneNode(true)
+      ), this.index = 0, this.rebuild(true), this;
     }
     _isFadeActive() {
-      return (
-        this.fade &&
-        !this.grid &&
-        !this.autoScroll &&
-        "vertical" !== this.direction &&
-        this.currentPerSlide <= 1
-      );
+      return this.fade && !this.grid && !this.autoScroll && "vertical" !== this.direction && this.currentPerSlide <= 1;
     }
     _initSync() {
       if (!this.options.sync) return;
-      let t = null;
-      if (this.options.sync instanceof o) t = this.options.sync;
+      let t2 = null;
+      if (this.options.sync instanceof o) t2 = this.options.sync;
       else if ("string" == typeof this.options.sync) {
-        const i = document.querySelector(this.options.sync);
-        if (i) {
-          if (!i.pagiflowInstance)
+        const i2 = document.querySelector(this.options.sync);
+        if (i2) {
+          if (!i2.pagiflowInstance)
             return void setTimeout(() => this._initSync(), 50);
-          t = i.pagiflowInstance;
+          t2 = i2.pagiflowInstance;
         }
       }
-      t &&
-        t !== this &&
-        this.syncTarget !== t &&
-        ((this.syncTarget = t),
-          (t.syncTarget = this),
-          (this._syncing = !1),
-          (t._syncing = !1));
+      t2 && t2 !== this && this.syncTarget !== t2 && (this.syncTarget = t2, t2.syncTarget = this, this._syncing = false, t2._syncing = false);
     }
     bindSlideClick() {
-      this.syncTarget &&
-        (this._delegatedClickHandler &&
-          this.slider.removeEventListener("click", this._delegatedClickHandler),
-          (this._delegatedClickHandler = (t) => {
-            if (this.isDragging || this.isAnimating || this._slideClickLocked)
-              return;
-            if (t.target.closest("a, button")) return;
-            const i = Math.abs(this.currentX - this.startX),
-              e = Math.abs(this.currentY - this.startY);
-            if (i > 5 || e > 5) return;
-            const s = t.target.closest(".pagiflow-slide");
-            if (!s) return;
-            const n = Number.parseInt(s.getAttribute("data-index"), 10);
-            if (!Number.isInteger(n)) return;
-            (this._slideClickLocked = !0),
-              (this.isAnimating = !0),
-              (this.index = this._getLoopTargetIndex(n)),
-              this.update(this.syncTarget);
-            const o = this.syncTarget;
-            o &&
-              ((o.isAnimating = !0),
-                (o.index = o._getLoopTargetIndex(n)),
-                o.update(this)),
-              clearTimeout(this._animTimer),
-              (this._animTimer = setTimeout(() => {
-                (this.isAnimating = !1),
-                  o && (o.isAnimating = !1),
-                  (this._slideClickLocked = !1);
-              }, this.speed));
-          }),
-          this.slider.addEventListener("click", this._delegatedClickHandler));
+      this.syncTarget && (this._delegatedClickHandler && this.slider.removeEventListener("click", this._delegatedClickHandler), this._delegatedClickHandler = (t2) => {
+        if (this.isDragging || this.isAnimating || this._slideClickLocked)
+          return;
+        if (t2.target.closest("a, button")) return;
+        const i2 = Math.abs(this.currentX - this.startX), e2 = Math.abs(this.currentY - this.startY);
+        if (i2 > 5 || e2 > 5) return;
+        const s2 = t2.target.closest(".pagiflow-slide");
+        if (!s2) return;
+        const n2 = Number.parseInt(s2.getAttribute("data-index"), 10);
+        if (!Number.isInteger(n2)) return;
+        this._slideClickLocked = true, this.isAnimating = true, this.index = this._getLoopTargetIndex(n2), this.update(this.syncTarget);
+        const o2 = this.syncTarget;
+        o2 && (o2.isAnimating = true, o2.index = o2._getLoopTargetIndex(n2), o2.update(this)), clearTimeout(this._animTimer), this._animTimer = setTimeout(() => {
+          this.isAnimating = false, o2 && (o2.isAnimating = false), this._slideClickLocked = false;
+        }, this.speed);
+      }, this.slider.addEventListener("click", this._delegatedClickHandler));
     }
   }
-  return function (t, i = {}) {
-    if (t && typeof t === "object" && !t.nodeType && typeof t.length !== "number") {
-      i = t;
-      t = i.slider;
+  return function(t2, i2 = {}) {
+    if (t2 && typeof t2 === "object" && !t2.nodeType && typeof t2.length !== "number") {
+      i2 = t2;
+      t2 = i2.slider;
     }
-    if (!t) return console.warn("Pagiflow: target missing"), null;
-    const s = [];
-
-    const elements = typeof t === "string" ? document.querySelectorAll(t) : (t.nodeType ? [t] : Array.from(t));
-    elements.forEach((t) => {
-      if (
-        (i.html &&
-          !t.dataset.pagiflowInjected &&
-          ((t.innerHTML = Array.isArray(i.html) ? i.html.join("") : i.html),
-            (t.dataset.pagiflowInjected = "true")),
-          t.closest(".pagiflow-wrapper"))
-      )
+    if (!t2) return console.warn("Pagiflow: target missing"), null;
+    const s2 = [];
+    const elements = typeof t2 === "string" ? document.querySelectorAll(t2) : t2.nodeType ? [t2] : Array.from(t2);
+    elements.forEach((t3) => {
+      if (i2.html && !t3.dataset.pagiflowInjected && (t3.innerHTML = Array.isArray(i2.html) ? i2.html.join("") : i2.html, t3.dataset.pagiflowInjected = "true"), t3.closest(".pagiflow-wrapper"))
         return;
-      const n = e(i),
-        l = document.createElement("div");
-      (l.className = "pagiflow-wrapper"),
-        l.setAttribute("role", "region"),
-        l.setAttribute("aria-roledescription", "carousel"),
-        l.setAttribute("aria-label", "Pagiflow Carousel"),
-        l.setAttribute("aria-atomic", "false"),
-        l.setAttribute("tabindex", "0");
+      const n2 = e(i2), l = document.createElement("div");
+      l.className = "pagiflow-wrapper", l.setAttribute("role", "region"), l.setAttribute("aria-roledescription", "carousel"), l.setAttribute("aria-label", "Pagiflow Carousel"), l.setAttribute("aria-atomic", "false"), l.setAttribute("tabindex", "0");
       const r = document.createElement("div");
       let a, h;
-      (r.className = "pagiflow-viewport"),
-        r.setAttribute("aria-live", "polite"),
-        t.parentNode.insertBefore(l, t);
+      r.className = "pagiflow-viewport", r.setAttribute("aria-live", "polite"), t3.parentNode.insertBefore(l, t3);
       let d = null;
-      !n.thumbnails.enabled || n.autoScroll || n.grid
-        ? l.appendChild(r)
-        : ((d = document.createElement("div")),
-          (d.className = "pagiflow-thumbnails-wrapper"),
-          l.appendChild(d),
-          d.appendChild(r)),
-        r.appendChild(t),
-        t.classList.add("pagiflow", "pagiflow-track"),
-        t.setAttribute("tabindex", "0"),
-        n.navigation?.prev &&
-        n.navigation?.next &&
-        ((a = document.querySelector(n.navigation.prev)),
-          (h = document.querySelector(n.navigation.next)),
-          (a && h) ||
-          console.warn("Custom nav buttons not found:", n.navigation));
-      const u = new o(t, n);
-      (t.pagiflowInstance = u), s.push(u);
+      !n2.thumbnails.enabled || n2.autoScroll || n2.grid ? l.appendChild(r) : (d = document.createElement("div"), d.className = "pagiflow-thumbnails-wrapper", l.appendChild(d), d.appendChild(r)), r.appendChild(t3), t3.classList.add("pagiflow", "pagiflow-track"), t3.setAttribute("tabindex", "0"), n2.navigation?.prev && n2.navigation?.next && (a = document.querySelector(n2.navigation.prev), h = document.querySelector(n2.navigation.next), a && h || console.warn("Custom nav buttons not found:", n2.navigation));
+      const u = new o(t3, n2);
+      t3.pagiflowInstance = u, s2.push(u);
     });
-    return 1 === s.length ? s[0] : s;
+    return 1 === s2.length ? s2[0] : s2;
   };
 })();
 

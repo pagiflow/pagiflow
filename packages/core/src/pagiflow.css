@@ -1,3 +1,13 @@
+/**
+ * Pagiflow 4.0.1
+ * A high-performance, zero-dependency slider for Vanilla JS, React, Vue, Svelte, Angular, and Solid JS.
+ * https://pagiflow.com
+ * https://github.com/pagiflow/pagiflow
+ * Copyright 2026-PRESENT
+ * Released under the MIT License
+ * Released on: June 17, 2026
+ */
+
 :root {
   --pf-shimmer-base: #eeeeee;
   --pf-shimmer-highlight: #dddddd;
