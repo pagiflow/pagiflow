@@ -1,6 +1,6 @@
 {
   "name": "pagiflow",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Pagiflow is a high-performance, zero-dependency slider for Vanilla JS, React, Vue, Svelte, Angular, and Solid JS.",
   "repository": {
     "type": "git",
