@@ -7,7 +7,6 @@
  * Released under the MIT License
  * Released on: June 17, 2026
  */
-
 :root {
   --pf-shimmer-base: #eeeeee;
   --pf-shimmer-highlight: #dddddd;
@@ -20,7 +19,9 @@
   }
 }
 
-.dark, [data-theme="dark"], .pf-dark {
+.dark,
+[data-theme="dark"],
+.pf-dark {
   --pf-shimmer-base: #262626;
   --pf-shimmer-highlight: #333333;
 }
@@ -556,9 +557,10 @@
 
 .pagiflow-lazy-loading {
   display: block;
-  background: linear-gradient(90deg, 
-    var(--pf-shimmer-base) 25%, 
-    var(--pf-shimmer-highlight) 37%, 
+  background: linear-gradient(
+    90deg,
+    var(--pf-shimmer-base) 25%,
+    var(--pf-shimmer-highlight) 37%,
     var(--pf-shimmer-base) 63%
   ) !important;
   background-size: 400% 100% !important;
@@ -574,7 +576,7 @@
   }
 }
 
-.pagiflow-direction-vertical .pagiflow-slide .pagiflow-item, 
+.pagiflow-direction-vertical .pagiflow-slide .pagiflow-item,
 .pagiflow-thumbnails-wrapper .pagiflow-slide .pagiflow-item {
   height: 100%;
 }
@@ -597,7 +599,7 @@
 
 .pagiflow-track.pagiflow-fade-mode .pagiflow-slide {
   position: absolute;
-  inset: 0;  
+  inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -643,4 +645,48 @@
   flex: 0 0 100%;
 }
 
-.pagiflow:not(.pagiflow-track) img { opacity: 0; }
+.pagiflow:not(.pagiflow-track) img {
+  opacity: 0;
+}
+
+.pagiflow-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.pagiflow-progress-inner {
+  height: 100%;
+  width: 0%;
+  background: #84cc16;
+  will-change: width;
+}
+
+.pagiflow-pagination-progressbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.pagiflow-pagination-progressbar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #84cc16;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms ease;
+  will-change: transform;
+}

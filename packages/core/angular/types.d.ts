@@ -41,6 +41,12 @@ export interface PagiflowOptions {
     pauseOnHover?: boolean;
     paginate?: boolean;
     paginationPosition?: string | Record<string, number | string> | null;
+    paginationType?: string | null;
+    autoplayProgress?: boolean;
+    freeMode?: boolean;
+    freeModeMomentum?: boolean;
+    draggable?: boolean;
+    on?: Record<string, (...args: any[]) => void>;
     autoScroll?: boolean;
     autoScrollSpeed?: number;
     autoScrollDirection?: PagiflowAutoScrollDirection;

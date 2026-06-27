@@ -105,7 +105,7 @@ PagiflowSlide.displayName = 'PagiflowSlide';
 const Pagiflow = React.forwardRef((_a, ref) => {
     var { children, className, style, onSlideChange, renderNav, renderPagination, id, 
     // Extract all PagiflowOptions — anything left goes to the track div
-    direction, fade, grid, gridColumns, gridFill, animate, itemsPerSlide, slidesToScroll, gap, height, startIndex, loop, speed, swipeThreshold, nav, navDisabledEnd, navigation, prevIcon, nextIcon, prevPosition, nextPosition, thumbnails, autoplay, autoplayDelay, pauseOnHover, paginate, paginationPosition, autoScroll, autoScrollSpeed, autoScrollDirection, lazyLoad, keyboard, centerMode, centerPadding, rtl, sync, responsive } = _a, rest = __rest(_a, ["children", "className", "style", "onSlideChange", "renderNav", "renderPagination", "id", "direction", "fade", "grid", "gridColumns", "gridFill", "animate", "itemsPerSlide", "slidesToScroll", "gap", "height", "startIndex", "loop", "speed", "swipeThreshold", "nav", "navDisabledEnd", "navigation", "prevIcon", "nextIcon", "prevPosition", "nextPosition", "thumbnails", "autoplay", "autoplayDelay", "pauseOnHover", "paginate", "paginationPosition", "autoScroll", "autoScrollSpeed", "autoScrollDirection", "lazyLoad", "keyboard", "centerMode", "centerPadding", "rtl", "sync", "responsive"]);
+    direction, fade, grid, gridColumns, gridFill, animate, itemsPerSlide, slidesToScroll, gap, height, startIndex, loop, speed, swipeThreshold, nav, navDisabledEnd, navigation, prevIcon, nextIcon, prevPosition, nextPosition, thumbnails, autoplay, autoplayDelay, pauseOnHover, paginate, paginationPosition, paginationType, autoplayProgress, freeMode, freeModeMomentum, draggable, on, autoScroll, autoScrollSpeed, autoScrollDirection, lazyLoad, keyboard, centerMode, centerPadding, rtl, sync, responsive } = _a, rest = __rest(_a, ["children", "className", "style", "onSlideChange", "renderNav", "renderPagination", "id", "direction", "fade", "grid", "gridColumns", "gridFill", "animate", "itemsPerSlide", "slidesToScroll", "gap", "height", "startIndex", "loop", "speed", "swipeThreshold", "nav", "navDisabledEnd", "navigation", "prevIcon", "nextIcon", "prevPosition", "nextPosition", "thumbnails", "autoplay", "autoplayDelay", "pauseOnHover", "paginate", "paginationPosition", "paginationType", "autoplayProgress", "freeMode", "freeModeMomentum", "draggable", "on", "autoScroll", "autoScrollSpeed", "autoScrollDirection", "lazyLoad", "keyboard", "centerMode", "centerPadding", "rtl", "sync", "responsive"]);
     const trackRef = React.useRef(null);
     const instanceRef = React.useRef(null);
     const onSlideChangeRef = React.useRef(onSlideChange);
@@ -170,6 +170,18 @@ const Pagiflow = React.forwardRef((_a, ref) => {
             opts.paginate = paginate;
         if (paginationPosition !== undefined)
             opts.paginationPosition = paginationPosition;
+        if (paginationType !== undefined)
+            opts.paginationType = paginationType;
+        if (autoplayProgress !== undefined)
+            opts.autoplayProgress = autoplayProgress;
+        if (freeMode !== undefined)
+            opts.freeMode = freeMode;
+        if (freeModeMomentum !== undefined)
+            opts.freeModeMomentum = freeModeMomentum;
+        if (draggable !== undefined)
+            opts.draggable = draggable;
+        if (on !== undefined)
+            opts.on = on;
         if (autoScroll !== undefined)
             opts.autoScroll = autoScroll;
         if (autoScrollSpeed !== undefined)
@@ -199,7 +211,8 @@ const Pagiflow = React.forwardRef((_a, ref) => {
             slidesToScroll, gap, height, startIndex, loop, speed, swipeThreshold,
             nav, navDisabledEnd, navigation, prevIcon, nextIcon, prevPosition,
             nextPosition, thumbnails, autoplay, autoplayDelay, pauseOnHover,
-            paginate, paginationPosition, autoScroll, autoScrollSpeed,
+            paginate, paginationPosition, paginationType, autoScroll, autoScrollSpeed,
+            autoplayProgress, freeMode, freeModeMomentum, draggable, on,
             autoScrollDirection, lazyLoad, keyboard, centerMode, centerPadding,
             rtl, sync, responsive,
         })

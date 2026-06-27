@@ -35,6 +35,12 @@
   export let pauseOnHover: boolean | undefined = undefined;
   export let paginate: boolean | undefined = undefined;
   export let paginationPosition: PagiflowOptions['paginationPosition'] = undefined;
+  export let paginationType: PagiflowOptions['paginationType'] = undefined;
+  export let autoplayProgress: PagiflowOptions['autoplayProgress'] = undefined;
+  export let freeMode: PagiflowOptions['freeMode'] = undefined;
+  export let freeModeMomentum: PagiflowOptions['freeModeMomentum'] = undefined;
+  export let draggable: PagiflowOptions['draggable'] = undefined;
+  export let on: PagiflowOptions['on'] = undefined;
   export let autoScroll: boolean | undefined = undefined;
   export let autoScrollSpeed: number | undefined = undefined;
   export let autoScrollDirection: PagiflowOptions['autoScrollDirection'] = undefined;
@@ -105,6 +111,12 @@
     if (pauseOnHover !== undefined) opts.pauseOnHover = pauseOnHover;
     if (paginate !== undefined) opts.paginate = paginate;
     if (paginationPosition !== undefined) opts.paginationPosition = paginationPosition;
+    if (paginationType !== undefined) opts.paginationType = paginationType;
+    if (autoplayProgress !== undefined) opts.autoplayProgress = autoplayProgress;
+    if (freeMode !== undefined) opts.freeMode = freeMode;
+    if (freeModeMomentum !== undefined) opts.freeModeMomentum = freeModeMomentum;
+    if (draggable !== undefined) opts.draggable = draggable;
+    if (on !== undefined) opts.on = on;
     if (autoScroll !== undefined) opts.autoScroll = autoScroll;
     if (autoScrollSpeed !== undefined) opts.autoScrollSpeed = autoScrollSpeed;
     if (autoScrollDirection !== undefined) opts.autoScrollDirection = autoScrollDirection;
